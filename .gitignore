@@ -1,0 +1,5 @@
+rsfind
+obj/
+test/obj/
+test/bin/
+*.o
