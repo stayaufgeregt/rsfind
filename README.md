@@ -1,7 +1,7 @@
-make dir : creates project directories (don't need if pull from repository)
+make dir : creates project directories 
 make clean : removes compilation files
 
-make : clean, compiles and executes ./rsfind
+make : dir, clean, compiles and executes ./rsfind
 make ARGS="some args" : clean, compiles and executes ./rsfind "some args"
 
 

@@ -31,7 +31,7 @@ TObjects=$(addprefix $(TestObjectDir),$(TestObjects))
 CExecutable=$(addprefix $(BinDir),$(Executable))
 TExecutable=$(addprefix $(TestBinDir),$(TestExecutable))
 
-all: clean $(CSources) $(CExecutable) run
+all: dir clean $(CSources) $(CExecutable) run
 
 clean:
 	$(RM) -f $(ObjectDir)* $(BinDir)$(Executable)
