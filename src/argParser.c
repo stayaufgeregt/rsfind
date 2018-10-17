@@ -1,3 +1,5 @@
+
+
 #include <getopt.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -11,12 +13,11 @@
 
 
 typedef	struct{
-
+	int flags[6];
+	char* path;
 	char* name;
 	char* exec;
 	char* text;
-	int flags[6];
-
 } args;
 
 void getArgs(args* myArgs,int argc,char* argv[]){
@@ -31,33 +32,26 @@ void getArgs(args* myArgs,int argc,char* argv[]){
 
 	
 	while((opt=getopt_long(argc,argv,"lit:",long_options,&option_index))!=-1){
-
 		switch((char)opt){
 
 			case 'n':
-				printf("Option n\n");
 				myArgs->flags[NAME]=1;
 				myArgs->name=optarg;
 				break;
 			case 'e':
-				printf("Option e\n");
 				myArgs->flags[EXEC]=1;
 				myArgs->exec=optarg;
 				break;
 			case 'p':
-				printf("Option p\n");
 				myArgs->flags[PRINT]=1;
 				break;
 			case 'l':
-				printf("OPtion l !\n");
 				myArgs->flags[L]=1;
 				break;
 			case 'i':
-				printf("Option i\n");
 				myArgs->flags[I]=1;
 				break;
 			case 't':
-				printf("Option t\n");
 				myArgs->flags[T]=1;
 				myArgs->text=optarg;
 				break;
