@@ -11,6 +11,7 @@
 #define I		4
 #define T		5
 
+#define OPTIONS_NUMBER 6
 
 typedef	struct{
 	int flags[6];
@@ -21,7 +22,10 @@ typedef	struct{
 } args;
 
 void getArgs(args* myArgs,int argc,char* argv[]){
-
+	
+	//NE PAS OUBLIER D'INITIALISER
+	memset(myArgs,0,sizeof(args));
+	
 	int opt;
 	int option_index = 0;
 	static struct option long_options[] ={

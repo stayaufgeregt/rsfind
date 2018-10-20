@@ -5,8 +5,15 @@
 int main(int argc,char* argv[]){
 
 	args mesArgs;
-	mesArgs.path=argv[argc-1];//vérifier
 	getArgs(&mesArgs,argc,argv);
+	
+	if(argc<2){
+		char currentPath[2]=".";
+		mesArgs.path=currentPath;//vérifier
+	}
+	else{
+		mesArgs.path=argv[argc-1];//vérifier
+	}
 	//printf("%s\n",mesArgs.path);
 	lsDir(mesArgs.path,&mesArgs);
 
