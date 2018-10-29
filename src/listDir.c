@@ -41,6 +41,7 @@ void lsDir(char* path,args* mesArgs){
 				strcat(childPath,"/");
 				strcat(childPath,ep->d_name);
 				// on fabrique le chemin fils "pathPere/nomFichierFils"
+
 								
 				if(mesArgs->flags[3]){
 					printf("HEYY\n");
@@ -75,8 +76,29 @@ void lsDir(char* path,args* mesArgs){
 
 				} else {
 					// Affichage par defaut sans options
-					//printf("%s\n",childPath);
-					
+					//printf("%s\n",childPath); A REMETTRE
+
+					stat(childPath,&path_stat);
+					(path_stat.st_mode & S_IFDIR)?(printf("d")):(printf("-"));
+					(path_stat.st_mode & S_IRUSR)?(printf("r")):(printf("-"));
+					(path_stat.st_mode & S_IWUSR)?(printf("w")):(printf("-"));
+					(path_stat.st_mode & S_IXUSR)?(printf("x")):(printf("-"));
+					(path_stat.st_mode & S_IRGRP)?(printf("r")):(printf("-"));
+					(path_stat.st_mode & S_IWGRP)?(printf("w")):(printf("-"));
+					(path_stat.st_mode & S_IXGRP)?(printf("x")):(printf("-"));
+					(path_stat.st_mode & S_IROTH)?(printf("r")):(printf("-"));
+					(path_stat.st_mode & S_IWOTH)?(printf("w")):(printf("-"));
+					(path_stat.st_mode & S_IXOTH)?(printf("x")):(printf("-"));
+					printf(" %d",(int)path_stat.st_nlink);
+					printf(" %d",(int)path_stat.st_uid);
+					printf(" %d",(int)path_stat.st_gid);
+					printf(" %ld",(unsigned long)path_stat.st_size);
+					char* tmp = ctime(&path_stat.st_ctime);
+					tmp[strlen(tmp)-1]='\0';
+					printf(" %s",tmp);
+					printf(" %s\n",ep->d_name);
+					// BLOC A ENLEVER QUAND TU AURAS VU
+
 						if(ep->d_type==DT_DIR){
 							lsDir(childPath,mesArgs);
 						}
