@@ -35,7 +35,7 @@ void getArgs(args* myArgs,int argc,char* argv[]){
 	};
 
 	
-	while((opt=getopt_long(argc,argv,"lit:",long_options,&option_index))!=-1){
+	while((opt=getopt_long(argc,argv,"n:e:plit:",long_options,&option_index))!=-1){
 		switch((char)opt){
 
 			case 'n':
@@ -59,6 +59,8 @@ void getArgs(args* myArgs,int argc,char* argv[]){
 				myArgs->flags[T]=1;
 				myArgs->text=optarg;
 				break;
+			case '?':
+				printf("L'option n'est pas reconnue\n");
 
 			default:
 				printf("L'option n'est pas reconnue\n");

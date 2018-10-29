@@ -6,7 +6,7 @@ int main(int argc,char* argv[]){
 
 	args mesArgs;
 	getArgs(&mesArgs,argc,argv);
-	
+
 	if(argc<2){
 		char currentPath[2]=".";
 		mesArgs.path=currentPath;//vérifier
