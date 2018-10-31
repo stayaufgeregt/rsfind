@@ -24,7 +24,7 @@ void lsDir(char* path,args* mesArgs){
 	}
 	//affichage du repertoire courant une seule fois
 
-	//if we can open the directory
+	//if directory is open
 	if(dp!=NULL){
 
 	
@@ -43,7 +43,7 @@ void lsDir(char* path,args* mesArgs){
 				// on fabrique le chemin fils "pathPere/nomFichierFils"
 
 								
-				if(mesArgs->flags[3]){
+				if(mesArgs->flags[L]){
 					printf("HEYY\n");
 					stat(childPath,&path_stat);
 					(path_stat.st_mode & S_IFDIR)?(printf("d")):(printf("-"));
@@ -65,10 +65,9 @@ void lsDir(char* path,args* mesArgs){
 					printf(" %s",tmp);
 					printf(" %s\n",ep->d_name);
 
-				} else if(mesArgs->flags[0]){
+				} else if(mesArgs->flags[NAME]){
 					//--name CHAINE
 					//if filename == CHAINE : display
-					printf("not supposed to be here\n");
 					
 					if(!strcmp(ep->d_name,mesArgs->name)){
 						printf("%s\n",childPath);

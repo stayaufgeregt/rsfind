@@ -4,12 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define NAME 	0
-#define EXEC 	1
-#define PRINT 	2
-#define L		3
-#define I		4
-#define T		5
+enum options { NAME , EXEC , PRINT , L, I , T};
+
 
 #define OPTIONS_NUMBER 6
 
