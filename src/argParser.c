@@ -15,7 +15,9 @@ typedef	struct{
 	char* name;
 	char* exec;
 	char* text;
+	int hasPath;
 } args;
+
 
 void getArgs(args* myArgs,int argc,char* argv[]){
 	
@@ -24,6 +26,8 @@ void getArgs(args* myArgs,int argc,char* argv[]){
 	
 	int opt;
 	int option_index = 0;
+	int cntOpt = 1;
+
 	static struct option long_options[] ={
 		{"name",required_argument,NULL,'n'},
 		{"exec",required_argument,NULL,'e'},
@@ -37,29 +41,40 @@ void getArgs(args* myArgs,int argc,char* argv[]){
 			case 'n':
 				myArgs->flags[NAME]=1;
 				myArgs->name=optarg;
+				cntOpt++;
 				break;
 			case 'e':
 				myArgs->flags[EXEC]=1;
 				myArgs->exec=optarg;
+				cntOpt++;
 				break;
 			case 'p':
 				myArgs->flags[PRINT]=1;
+				cntOpt++;
 				break;
 			case 'l':
 				myArgs->flags[L]=1;
+				cntOpt++;
 				break;
 			case 'i':
 				myArgs->flags[I]=1;
+				cntOpt++;
 				break;
 			case 't':
 				myArgs->flags[T]=1;
 				myArgs->text=optarg;
+				cntOpt++;
 				break;
 			case '?':
 				printf("L'option n'est pas reconnue\n");
+				cntOpt++;
 
 			default:
 				printf("L'option n'est pas reconnue\n");
 		}
+	}
+
+	if((argc-cntOpt)!=0){
+		myArgs->hasPath = 1;
 	}
 }

@@ -4,17 +4,21 @@
 
 int main(int argc,char* argv[]){
 
-	args mesArgs;
-	getArgs(&mesArgs,argc,argv);
+	args myArgs;
+	getArgs(&myArgs,argc,argv);
 
-	if(argc<2){
+	if(argc<2){ //Si sans options
 		char currentPath[2]=".";
-		mesArgs.path=currentPath;//vérifier
+		myArgs.path=currentPath;
 	}
 	else{
-		mesArgs.path=argv[argc-1];//vérifier
+		if(myArgs.hasPath){
+			myArgs.path=argv[argc-1];
+		} else {
+			myArgs.path=".";
+		}
 	}
-	//printf("%s\n",mesArgs.path);
-	lsDir(mesArgs.path,&mesArgs);
+	//printf("%s\n",myaRgs.path);
+	lsDir(myArgs.path,&myArgs);
 
 }

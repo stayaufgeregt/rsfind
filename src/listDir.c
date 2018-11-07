@@ -29,7 +29,7 @@ void lsDir(char* path,args* mesArgs){
 
 	dp=opendir(path);
 	
-	if(strcmp(path,".")==0){
+	if((strcmp(path,".")==0) && !mesArgs->flags[L]){
 		printf("%s\n",path);
 	}
 	//affichage du repertoire courant une seule fois
@@ -78,6 +78,10 @@ void lsDir(char* path,args* mesArgs){
 					tmp[strlen(tmp)-1]='\0';
 					printf(" %s",tmp);
 					printf(" %s\n",ep->d_name);
+
+					if(ep->d_type==DT_DIR){
+						lsDir(childPath,mesArgs);
+					}
 
 				} else if(mesArgs->flags[NAME]){
 					//--name CHAINE
