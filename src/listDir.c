@@ -9,8 +9,9 @@
 #include <time.h>
 #include <grp.h>
 #include <pwd.h>
+#include <fcntl.h>
 
-void lsDir(char* path,args* mesArgs){
+void lsDir(char* path,args* myArgs){
 
 	DIR* dp;
 	//directory to list
@@ -29,7 +30,7 @@ void lsDir(char* path,args* mesArgs){
 
 	dp=opendir(path);
 	
-	if((strcmp(path,".")==0) && !mesArgs->flags[L]){
+	if((strcmp(path,".")==0) && !myArgs->flags[L] && !myArgs->flags[T]){
 		printf("%s\n",path);
 	}
 	//affichage du repertoire courant une seule fois
@@ -53,7 +54,7 @@ void lsDir(char* path,args* mesArgs){
 				// on fabrique le chemin fils "pathPere/nomFichierFils"
 
 								
-				if(mesArgs->flags[L]){
+				if(myArgs->flags[L]){
 					stat(childPath,&path_stat);
 					(path_stat.st_mode & S_IFDIR)?(printf("d")):(printf("-"));
 					(path_stat.st_mode & S_IRUSR)?(printf("r")):(printf("-"));
@@ -80,23 +81,42 @@ void lsDir(char* path,args* mesArgs){
 					printf(" %s\n",ep->d_name);
 
 					if(ep->d_type==DT_DIR){
-						lsDir(childPath,mesArgs);
+						lsDir(childPath,myArgs);
 					}
 
-				} else if(mesArgs->flags[NAME]){
+				} else if(myArgs->flags[NAME]){
 					//--name CHAINE
 					//if filename == CHAINE : display
 					
-					if(!strcmp(ep->d_name,mesArgs->name)){
+					if(!strcmp(ep->d_name,myArgs->name)){
 						printf("%s\n",childPath);
 					}
+
+				} else if(myArgs->flags[T]){
+					
+					if(ep->d_type==DT_REG){
+						int fd;
+						fd = open(childPath,O_RDONLY);
+						stat(childPath,&path_stat);
+						char fileBuffer[path_stat.st_size];
+						read(fd,fileBuffer,path_stat.st_size);
+		
+						if(strstr(fileBuffer,myArgs->text)>0){
+							printf("%s\n",childPath);
+						}
+
+
+					} else if(ep->d_type==DT_DIR){
+						lsDir(childPath,myArgs);
+					}
+					
 
 				} else {
 					// Affichage par defaut sans options
 					printf("%s\n",childPath);
 
 						if(ep->d_type==DT_DIR){
-							lsDir(childPath,mesArgs);
+							lsDir(childPath,myArgs);
 						}
 
 				}
