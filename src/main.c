@@ -14,7 +14,7 @@ int main(int argc,char* argv[]){
 	else{
 		if(myArgs.hasPath){
 			myArgs.path=argv[argc-1];
-			printf("%s",myArgs.path);
+			printf("%s\n",myArgs.path);
 		} else {
 			myArgs.path=".";
 		}
