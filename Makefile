@@ -4,7 +4,7 @@ TestSources=testmain.C
 Executable=rsfind
 TestExecutable=test_rsfind
 
-CFlags=-std=gnu99 -c -Wall -g
+CFlags=-std=gnu99 -c -Wall -g -Werror -Wextra
 LDFlags=
 
 ObjectDir=obj/

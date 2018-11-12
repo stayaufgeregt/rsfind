@@ -101,7 +101,7 @@ void lsDir(char* path,args* myArgs){
 						char fileBuffer[path_stat.st_size];
 						read(fd,fileBuffer,path_stat.st_size);
 		
-						if(strstr(fileBuffer,myArgs->text)>0){
+						if(strstr(fileBuffer,myArgs->text)!=NULL){
 							printf("%s\n",childPath);
 						}
 
