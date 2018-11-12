@@ -50,15 +50,15 @@ void getArgs(args* myArgs,int argc,char* argv[]){
 				break;
 			case 'p':
 				myArgs->flags[PRINT]=1;
-				cntOpt++;
+				cntOpt +=1;
 				break;
 			case 'l':
 				myArgs->flags[L]=1;
-				cntOpt++;
+				cntOpt +=1;
 				break;
 			case 'i':
 				myArgs->flags[I]=1;
-				cntOpt++;
+				cntOpt +=1;
 				break;
 			case 't':
 				myArgs->flags[T]=1;
@@ -67,10 +67,12 @@ void getArgs(args* myArgs,int argc,char* argv[]){
 				break;
 			case '?':
 				printf("L'option n'est pas reconnue\n");
-				cntOpt++;
+				cntOpt +=1;
+				break;
 
 			default:
 				printf("L'option n'est pas reconnue\n");
+				break;
 		}
 	}
 

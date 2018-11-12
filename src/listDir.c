@@ -75,8 +75,20 @@ void lsDir(char* path,args* myArgs){
 					printf(" %s",info_gp->gr_name);
 
 					printf(" %ld",(unsigned long)path_stat.st_size);
+				//	struct tm *infoTime = gmtime(&path_stat.st_ctime);
+				//	printf(" %d. %d %d:%d",infoTime->tm_mon+1,infoTime->tm_mday+1,infoTime->tm_hour+1,infoTime->tm_min);
 					char* tmp = ctime(&path_stat.st_ctime);
-					tmp[strlen(tmp)-1]='\0';
+					tmp = tmp + 4; // enlever le mois en toutes lettres
+					tmp[strlen(tmp)-9]='\0';// enlever les secs et l'année
+					tmp[0]=tmp[0]+32; // la maj du mos en min
+					char* tmp2 = malloc(strlen(tmp)*sizeof(char));
+					strcpy(tmp2,tmp);
+					tmp[3]='\0';
+					tmp2[1]='.';
+					tmp2[2]=' ';
+					tmp2 = tmp2 + 1;
+					strcat(tmp,tmp2);
+					
 					printf(" %s",tmp);
 					printf(" %s\n",ep->d_name);
 
