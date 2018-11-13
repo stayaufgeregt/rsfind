@@ -18,11 +18,12 @@ typedef	struct{
 	int hasPath;
 } args;
 
+static args myArgs;
 
-void getArgs(args* myArgs,int argc,char* argv[]){
+void getArgs(int argc,char* argv[]){
 	
 	//NE PAS OUBLIER D'INITIALISER
-	memset(myArgs,0,sizeof(args));
+	memset(&myArgs,0,sizeof(args));
 	
 	int opt;
 	int option_index = 0;
@@ -39,30 +40,30 @@ void getArgs(args* myArgs,int argc,char* argv[]){
 		switch((char)opt){
 
 			case 'n':
-				myArgs->flags[NAME]=1;
-				myArgs->name=optarg;
+				myArgs.flags[NAME]=1;
+				myArgs.name=optarg;
 				cntOpt +=2;
 				break;
 			case 'e':
-				myArgs->flags[EXEC]=1;
-				myArgs->exec=optarg;
+				myArgs.flags[EXEC]=1;
+				myArgs.exec=optarg;
 				cntOpt +=2;
 				break;
 			case 'p':
-				myArgs->flags[PRINT]=1;
+				myArgs.flags[PRINT]=1;
 				cntOpt +=1;
 				break;
 			case 'l':
-				myArgs->flags[L]=1;
+				myArgs.flags[L]=1;
 				cntOpt +=1;
 				break;
 			case 'i':
-				myArgs->flags[I]=1;
+				myArgs.flags[I]=1;
 				cntOpt +=1;
 				break;
 			case 't':
-				myArgs->flags[T]=1;
-				myArgs->text=optarg;
+				myArgs.flags[T]=1;
+				myArgs.text=optarg;
 				cntOpt +=2;
 				break;
 			case '?':
@@ -77,6 +78,20 @@ void getArgs(args* myArgs,int argc,char* argv[]){
 	}
 
 	if((argc-cntOpt)!=0){
-		myArgs->hasPath = 1;
+		myArgs.hasPath = 1;
+	}
+	
+	if(argc<2){ //Si sans options
+		char currentPath[2]=".";
+		myArgs.path=currentPath;
+	}
+	else{
+		if(myArgs.hasPath){
+			myArgs.path=argv[argc-1];
+			//printf("%s\n",myArgs.path);
+		}
+		else{
+			myArgs.path=".";
+		}
 	}
 }

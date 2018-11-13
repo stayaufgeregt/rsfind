@@ -146,11 +146,9 @@ void lsDir(char* path,args* myArgs){
 				} else {
 					// Affichage par defaut sans options
 					printf("%s\n",childPath);
-
-						if(ep->d_type==DT_DIR){
-							lsDir(childPath,myArgs);
-						}
-
+					if(ep->d_type==DT_DIR){
+						lsDir(childPath,myArgs);
+					}
 				}
 			//free(childPath);
 			}
