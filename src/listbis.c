@@ -1,20 +1,25 @@
-#include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-
 #include <dirent.h>
 #include <string.h>
-#include "argParser.c"
 #include <errno.h>
-
 #include <unistd.h>
 #include <time.h>
 #include <grp.h>
 #include <pwd.h>
 #include <fcntl.h>
+#include <magic.h>
+#include <stdbool.h>
+
+#include "argParser.c"
+
+void affichage(char* filePath);
+bool hasName(char* fileName);
+bool isImage(char* filePath);
+bool hasText(char* filePath,struct stat* fileStat);
+void lsDir(char* filePath,char* fileName);
 
 
-void affichage(char* path);
 
 void lsDir(char* path,char* name){
 	
@@ -23,36 +28,12 @@ void lsDir(char* path,char* name){
 	memset(&path_stat,0,sizeof(path_stat));
     stat(path, &path_stat);
 	
-	
-	//cas de base
-	if(myArgs.flags[NAME]){
-		//--name CHAINE
-		//if filename == CHAINE : display
-		if(name!= NULL && !strcmp(name,myArgs.name)){
-			affichage(path);
-		}
-	}
-	else if(myArgs.flags[T]){
 
-		if(S_ISREG(path_stat.st_mode)){
-			
-			int fd;
-			fd = open(path,O_RDONLY);
-			stat(path,&path_stat);
-			char fileBuffer[path_stat.st_size];
-			read(fd,fileBuffer,path_stat.st_size);
-
-			if(strstr(fileBuffer,myArgs.text)!=NULL){
-				affichage(path);
-			}
-		}
-	}
-	else{
-		// Affichage par defaut sans options
-		affichage(path);	
-	}
-	
-	
+	if( (!myArgs.flags[NAME] || hasName(name) ) &&
+		(!myArgs.flags[T]	 || hasText(path,&path_stat) ) &&
+		(!myArgs.flags[I] 	 || isImage(path) ) )
+		
+		affichage(path);
 	
 	//appel recursif
 	if(S_ISDIR(path_stat.st_mode)){
@@ -66,8 +47,7 @@ void lsDir(char* path,char* name){
 			while((ep=readdir(dp))!=NULL){
 			
 				//if it is not current dir or parent dir
-				if(strcmp(ep->d_name,".git")&& strcmp(ep->d_name,"..") && strcmp(ep->d_name,".")){
-
+				if(strcmp(ep->d_name,"..") && strcmp(ep->d_name,".")){
 					char *childPath=malloc(sizeof(char)*(strlen(path)+2+strlen(ep->d_name)));
 					strcpy(childPath,path);
 					strcat(childPath,"/");
@@ -79,14 +59,45 @@ void lsDir(char* path,char* name){
 			closedir(dp);
 		}
 		else{
-			return 1;
+			exit(1);
 		}		
 	}
 }
 
 
+bool hasName(char* name){
+	return name!=NULL && !strcmp(name,myArgs.name);
+}
+
+bool isImage(char* path){
+	
+	const char *magic_info;
+	magic_t magic_buf=magic_open(MAGIC_MIME_TYPE);
+
+	if (magic_load(magic_buf, NULL) != 0) {
+		magic_close(magic_buf);
+		exit(1);
+	}
+	magic_info=magic_file(magic_buf, path);
+	return strncmp("image",magic_info,5)==0;
+}
+
+bool hasText(char* path,struct stat* path_stat){
+	
+	if(!S_ISREG(path_stat->st_mode))
+		return false;
+	
+	int fd;
+	fd = open(path,O_RDONLY);
+	char fileBuffer[path_stat->st_size];
+	read(fd,fileBuffer,path_stat->st_size);
+	/////////////if read fails ????
+	return strstr(fileBuffer,myArgs.text)!=NULL;
+}
+
 
 void affichage(char* path){
+
 	if(!myArgs.flags[L]){
 		printf("%s\n",path);
 	}

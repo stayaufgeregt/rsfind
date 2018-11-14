@@ -22,7 +22,7 @@ static args myArgs;
 
 void getArgs(int argc,char* argv[]){
 	
-	//NE PAS OUBLIER D'INITIALISER
+	//initialize
 	memset(&myArgs,0,sizeof(args));
 	
 	int opt;
@@ -69,29 +69,23 @@ void getArgs(int argc,char* argv[]){
 			case '?':
 				printf("L'option n'est pas reconnue\n");
 				cntOpt +=1;
+				exit(1);
 				break;
 
 			default:
 				printf("L'option n'est pas reconnue\n");
+				exit(1);
 				break;
 		}
 	}
 
-	if((argc-cntOpt)!=0){
-		myArgs.hasPath = 1;
-	}
 	
-	if(argc<2){ //Si sans options
-		char currentPath[2]=".";
-		myArgs.path=currentPath;
+	if((argc-cntOpt)!=0){
+		//path is provided
+		myArgs.path=argv[argc-1];
 	}
 	else{
-		if(myArgs.hasPath){
-			myArgs.path=argv[argc-1];
-			//printf("%s\n",myArgs.path);
-		}
-		else{
-			myArgs.path=".";
-		}
+		myArgs.path=".";
 	}
+	
 }

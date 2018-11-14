@@ -11,7 +11,7 @@ int main(void){
 
 
 //{
-    char *file_name = "txtimg.odt"; //ep->d_name;
+    char *file_name = "../dansquelmonde.jpg"; //ep->d_name;
     const char *magic_info;
     magic_t magic_buf;
     char* model ="image";
@@ -29,7 +29,7 @@ int main(void){
     strcpy(tmp,magic_info);
     tmp[5]='\0';
 
-    if(strcmp(model,tmp)==0){
+    if(strncmp(magic_info,model,6)==0){
         printf("1\n");
     } else {
         printf("0\n");

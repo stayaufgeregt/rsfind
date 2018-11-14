@@ -5,7 +5,7 @@ Executable=rsfind
 TestExecutable=test_rsfind
 
 CFlags=-std=gnu99 -c -Wall -g -Werror -Wextra
-LDFlags=
+LDFlags=-lmagic
 
 ObjectDir=obj/
 SourceDir=src/
@@ -50,7 +50,7 @@ testexe: $(TExecutable)
 	$(TExecutable)
 	
 $(CExecutable): $(CObjects)
-	$(CC) $(LDFlags) $^ -o $@
+	$(CC) $^ -o $@ $(LDFlags)
 
 $(ObjectDir)%.o: $(SourceDir)%.c
 	$(CC) $(CFlags) $^ -o $@
