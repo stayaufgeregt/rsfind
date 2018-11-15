@@ -10,7 +10,7 @@ enum options { NAME , EXEC , PRINT , L, I , T};
 #define OPTIONS_NUMBER 6
 
 typedef	struct{
-	int flags[6];
+	int flags[OPTIONS_NUMBER];
 	char* path;
 	char* name;
 	char* exec;
@@ -19,6 +19,9 @@ typedef	struct{
 
 static args myArgs;
 
+
+//analyses and processes the arguments passed to rsfind
+//stores them in static structure myArgs
 void getArgs(int argc,char* argv[]){
 	
 	//initialize
@@ -48,6 +51,7 @@ void getArgs(int argc,char* argv[]){
 				myArgs.exec=optarg;
 				cntOpt +=2;
 				
+				//replace {} with %s
 				char* bracketsPosition=strstr(myArgs.exec,"{}");
 				if(bracketsPosition==NULL)exit(1);
 				strncpy(bracketsPosition,"%s",2);
@@ -85,10 +89,11 @@ void getArgs(int argc,char* argv[]){
 
 	
 	if((argc-cntOpt)!=0){
-		//path is provided
+		//if path is provided; it is set at the end of argv by getopt
 		myArgs.path=argv[argc-1];
 	}
 	else{
+		//default path
 		myArgs.path=".";
 	}
 	

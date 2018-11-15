@@ -14,15 +14,16 @@
 
 #include "argParser.c"
 
-void affichage(char* filePath);
-bool hasName(char* fileName);
-bool isImage(char* filePath);
-bool hasText(char* filePath,struct stat* fileStat);
-void lsDir(char* filePath,char* fileName);
+void applyAction(char* filePath);		//--print, --exec or ls -l on the current file
+bool hasName(char* fileName);			//fileName==CHAINE with --name CHAINE 
+bool isImage(char* filePath);			//true if file is an image; regardless of its extension
+bool hasText(char* filePath,struct stat* fileStat);		//file located at filePath contains string CHAINE with -t CHAINE
+void recursiveSearch(char* filePath,char* fileName);	//in-depth search from filePath
+//fileName is contained in filePath but it avoids some processing to pass it as an argument.
 
 
 
-void lsDir(char* path,char* name){
+void recursiveSearch(char* path,char* name){
 	
 	
 	struct stat path_stat;
@@ -34,13 +35,13 @@ void lsDir(char* path,char* name){
 		(!myArgs.flags[T]	 || hasText(path,&path_stat) ) &&
 		(!myArgs.flags[I] 	 || isImage(path) ) )
 		
-		affichage(path);
+		applyAction(path);
 	
-	//appel recursif
+	//recursive call if the file is a directory
 	if(S_ISDIR(path_stat.st_mode)){
 		
 		DIR* dp;			//directory to list		
-		struct dirent *ep;	//curent file being listed
+		struct dirent *ep;	//current file being listed
 		dp=opendir(path);
 		
 		if(dp!=NULL){
@@ -52,8 +53,8 @@ void lsDir(char* path,char* name){
 					char *childPath=malloc(sizeof(char)*(strlen(path)+2+strlen(ep->d_name)));
 					strcpy(childPath,path);
 					strcat(childPath,"/");
-					strcat(childPath,ep->d_name);
-					lsDir(childPath,ep->d_name);
+					strcat(childPath,ep->d_name);		//append the name of the child to the current path
+					recursiveSearch(childPath,ep->d_name);
 					free(childPath);
 				}
 			}
@@ -97,7 +98,7 @@ bool hasText(char* path,struct stat* path_stat){
 }
 
 
-void affichage(char* path){
+void applyAction(char* path){
 
 	if(myArgs.flags[EXEC]){
 		
@@ -108,46 +109,46 @@ void affichage(char* path){
 		
 	}
 	else if(myArgs.flags[L]){
-	struct stat path_stat;	//info about the file
-	struct group *info_gp;	//info about file's gid
-	struct passwd *info_usr;//info about file's uid
+		struct stat path_stat;	//info about the file
+		struct group *info_gp;	//info about file's gid
+		struct passwd *info_usr;//info about file's uid
 
-	stat(path,&path_stat);
-	(path_stat.st_mode & S_IFDIR)?(printf("d")):(printf("-"));
-	(path_stat.st_mode & S_IRUSR)?(printf("r")):(printf("-"));
-	(path_stat.st_mode & S_IWUSR)?(printf("w")):(printf("-"));
-	(path_stat.st_mode & S_IXUSR)?(printf("x")):(printf("-"));
-	(path_stat.st_mode & S_IRGRP)?(printf("r")):(printf("-"));
-	(path_stat.st_mode & S_IWGRP)?(printf("w")):(printf("-"));
-	(path_stat.st_mode & S_IXGRP)?(printf("x")):(printf("-"));
-	(path_stat.st_mode & S_IROTH)?(printf("r")):(printf("-"));
-	(path_stat.st_mode & S_IWOTH)?(printf("w")):(printf("-"));
-	(path_stat.st_mode & S_IXOTH)?(printf("x")):(printf("-"));
-	printf(" %d",(int)path_stat.st_nlink);
+		stat(path,&path_stat);
+		(path_stat.st_mode & S_IFDIR)?(printf("d")):(printf("-"));
+		(path_stat.st_mode & S_IRUSR)?(printf("r")):(printf("-"));
+		(path_stat.st_mode & S_IWUSR)?(printf("w")):(printf("-"));
+		(path_stat.st_mode & S_IXUSR)?(printf("x")):(printf("-"));
+		(path_stat.st_mode & S_IRGRP)?(printf("r")):(printf("-"));
+		(path_stat.st_mode & S_IWGRP)?(printf("w")):(printf("-"));
+		(path_stat.st_mode & S_IXGRP)?(printf("x")):(printf("-"));
+		(path_stat.st_mode & S_IROTH)?(printf("r")):(printf("-"));
+		(path_stat.st_mode & S_IWOTH)?(printf("w")):(printf("-"));
+		(path_stat.st_mode & S_IXOTH)?(printf("x")):(printf("-"));
+		printf(" %d",(int)path_stat.st_nlink);
 
-	info_usr=getpwuid(path_stat.st_uid);
-	printf(" %s",info_usr->pw_name);
+		info_usr=getpwuid(path_stat.st_uid);
+		printf(" %s",info_usr->pw_name);
 
-	info_gp=getgrgid(path_stat.st_gid);
-	printf(" %s",info_gp->gr_name);
+		info_gp=getgrgid(path_stat.st_gid);
+		printf(" %s",info_gp->gr_name);
 
-	printf(" %ld",(unsigned long)path_stat.st_size);
+		printf(" %ld",(unsigned long)path_stat.st_size);
 
-	char* tmp = ctime(&path_stat.st_ctime);
-	tmp = tmp + 4; // enlever le mois en toutes lettres
-	tmp[strlen(tmp)-9]='\0';// enlever les secs et l'année
-	tmp[0]=tmp[0]+32; // la maj du mos en min
-	char* tmp2 = malloc(strlen(tmp)*sizeof(char));
-	strcpy(tmp2,tmp);
-	tmp[3]='\0';
-	tmp2[1]='.';
-	tmp2[2]=' ';
-	tmp2 = tmp2 + 1;
-	strcat(tmp,tmp2);
-	
-	printf(" %s",tmp);
-	printf(" %s\n",path);
-	//free(tmp2);
+		char* tmp = ctime(&path_stat.st_ctime);
+		tmp = tmp + 4; // enlever le mois en toutes lettres
+		tmp[strlen(tmp)-9]='\0';// enlever les secs et l'année
+		tmp[0]=tmp[0]+32; // la maj du mos en min
+		char* tmp2 = malloc(strlen(tmp)*sizeof(char));
+		strcpy(tmp2,tmp);
+		tmp[3]='\0';
+		tmp2[1]='.';
+		tmp2[2]=' ';
+		tmp2 = tmp2 + 1;
+		strcat(tmp,tmp2);
+		
+		printf(" %s",tmp);
+		printf(" %s\n",path);
+		//free(tmp2);
 	}
 	else{
 		printf("%s\n",path);
