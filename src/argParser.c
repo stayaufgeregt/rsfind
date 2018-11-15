@@ -15,7 +15,6 @@ typedef	struct{
 	char* name;
 	char* exec;
 	char* text;
-	int hasPath;
 } args;
 
 static args myArgs;
@@ -48,6 +47,11 @@ void getArgs(int argc,char* argv[]){
 				myArgs.flags[EXEC]=1;
 				myArgs.exec=optarg;
 				cntOpt +=2;
+				
+				char* bracketsPosition=strstr(myArgs.exec,"{}");
+				if(bracketsPosition==NULL)exit(1);
+				strncpy(bracketsPosition,"%s",2);
+				
 				break;
 			case 'p':
 				myArgs.flags[PRINT]=1;

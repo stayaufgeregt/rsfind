@@ -1,5 +1,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <dirent.h>
 #include <string.h>
 #include <errno.h>
@@ -98,10 +99,28 @@ bool hasText(char* path,struct stat* path_stat){
 
 void affichage(char* path){
 
-	if(!myArgs.flags[L]){
-		printf("%s\n",path);
+	if(myArgs.flags[EXEC]){
+		pid_t pid;
+		
+		if((pid=fork())<0){
+			exit(1);
+		}
+		else if(pid==0){
+			char* command=malloc(sizeof(char)*strlen(myArgs.exec)+strlen(path)+1);
+			
+			sprintf(command,myArgs.exec,path);
+			
+			system(command);
+			free(command);
+			exit(0);
+		}
+		else{
+			int statut;
+			int options = 0;
+			waitpid(pid, &statut, options);
+		}
 	}
-	else{
+	else if(myArgs.flags[L]){
 	struct stat path_stat;	//info about the file
 	struct group *info_gp;	//info about file's gid
 	struct passwd *info_usr;//info about file's uid
@@ -142,5 +161,8 @@ void affichage(char* path){
 	printf(" %s",tmp);
 	printf(" %s\n",path);
 	//free(tmp2);
+	}
+	else{
+		printf("%s\n",path);
 	}
 }
