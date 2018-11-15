@@ -1,11 +1,11 @@
-#include "listbis.c"
+#include "rsfind.c"
 
 
 
 int main(int argc,char** argv){
 
 	getArgs(argc,argv);
-	lsDir(myArgs.path,NULL);
+	recursiveSearch(myArgs.path,NULL);
 	return 0;
 }
 
