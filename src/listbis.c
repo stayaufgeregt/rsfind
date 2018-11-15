@@ -100,25 +100,12 @@ bool hasText(char* path,struct stat* path_stat){
 void affichage(char* path){
 
 	if(myArgs.flags[EXEC]){
-		pid_t pid;
 		
-		if((pid=fork())<0){
-			exit(1);
-		}
-		else if(pid==0){
-			char* command=malloc(sizeof(char)*strlen(myArgs.exec)+strlen(path)+1);
-			
-			sprintf(command,myArgs.exec,path);
-			
-			system(command);
-			free(command);
-			exit(0);
-		}
-		else{
-			int statut;
-			int options = 0;
-			waitpid(pid, &statut, options);
-		}
+		char* command=malloc(sizeof(char)*strlen(myArgs.exec)+strlen(path)-1);
+		sprintf(command,myArgs.exec,path);
+		system(command);
+		free(command);
+		
 	}
 	else if(myArgs.flags[L]){
 	struct stat path_stat;	//info about the file
