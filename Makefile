@@ -44,7 +44,8 @@ dir:
 run: $(CExecutable)
 	$(CExecutable) $(ARGS)
 
-test:  $(CSources) $(TSources) $(TExecutable) testexe
+test:  dir clean $(CSources) $(CExecutable)
+	bash ./test/tests.bash
 
 testexe: $(TExecutable)
 	$(TExecutable)
