@@ -134,7 +134,7 @@ void applyAction(char* path){
 
 		printf(" %ld",(unsigned long)path_stat.st_size);
 
-		char* tmp = ctime(&path_stat.st_ctime);
+		char* tmp = ctime(&path_stat.st_mtime);
 		tmp = tmp + 4; // enlever le mois en toutes lettres
 		tmp[strlen(tmp)-9]='\0';// enlever les secs et l'année
 		tmp[0]=tmp[0]+32; // la maj du mos en min
