@@ -1,0 +1,18 @@
+1c1,15
+< L'option n'est pas reconnue
+---
+> ../.git/hooks/pre-commit.sample
+> ../.git/hooks/pre-rebase.sample
+> ../.git/hooks/prepare-commit-msg.sample
+> ../.git/hooks/update.sample
+> ../comments.txt
+> ../obj/main.o
+> ../README.md
+> ../rsfind
+> ../src/argParser.c
+> ../src/main.c
+> ../src/rsfind.c
+> ../test/a.out
+> ../test/maggi.c
+> ../test/test.c
+> ../test/tests.bash
