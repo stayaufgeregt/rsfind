@@ -1,5 +1,4 @@
 
-
 #include <getopt.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -17,6 +16,39 @@ typedef	struct{
 	char* text;
 } args;
 
+typedef struct{
+	char** argv;
+}command_t;
+
+typedef struct{
+	command_t* cmd;
+	size_t nbCmd;
+}statement_t;
+
+statement_t parseCmd(char* command){
+	char** tabStr=malloc(sizeof(char*)*strlen(command));
+	int tabSize = 0;
+
+	char* word = strtok(command,"|");
+	while(word!=NULL){
+		tabStr[tabSize]=word;
+		word = strtok(NULL,"|");
+		tabSize++;
+	}
+	tabStr[tabSize]=NULL;
+	tabStr=realloc(tabStr,sizeof(char*)*(tabSize+1));
+	for(int i=0;i<tabSize;i++){
+		printf("%s\n",tabStr[i]);
+	}
+	printf("%d\n", tabSize);
+
+	char ** tabCmd=malloc(sizeof(char*)*strlen(command));
+	for(int j=0;j<tabSize;j++){
+		word = strtok(tabStr[j]," ");
+
+	}
+	return 
+}
 static args myArgs;
 
 

@@ -98,13 +98,22 @@ bool hasText(char* path,struct stat* path_stat){
 }
 
 
+
 void applyAction(char* path){
 
 	if(myArgs.flags[EXEC]){
 		
 		char* command=malloc(sizeof(char)*strlen(myArgs.exec)+strlen(path)-1);
 		sprintf(command,myArgs.exec,path);
+		#ifdef DEBUG
 		system(command);
+		#else
+		// parse the command
+
+		#endif
+
+
+
 		free(command);
 		
 	}
