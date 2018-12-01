@@ -1,0 +1,6 @@
+1c1,3
+< L'option n'est pas reconnue
+---
+> ./test/a.out
+> ./test/maggi.c
+> ./test/test.c

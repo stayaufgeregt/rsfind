@@ -45,7 +45,7 @@ run: $(CExecutable)
 	$(CExecutable) $(ARGS)
 
 test:  dir clean $(CSources) $(CExecutable)
-	bash ./test/tests.bash
+	bash ./auto_test.bash
 
 testexe: $(TExecutable)
 	$(TExecutable)

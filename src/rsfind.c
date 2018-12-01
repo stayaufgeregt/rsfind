@@ -12,7 +12,7 @@
 #include <magic.h>
 #include <stdbool.h>
 
-#include "argParser.c"
+#include "opt_parser.c"
 
 void applyAction(char* filePath);		//--print, --exec or ls -l on the current file
 bool hasName(char* fileName);			//fileName==CHAINE with --name CHAINE 
@@ -24,7 +24,6 @@ void recursiveSearch(char* filePath,char* fileName);	//in-depth search from file
 
 
 void recursiveSearch(char* path,char* name){
-	
 	
 	struct stat path_stat;
 	memset(&path_stat,0,sizeof(path_stat));
@@ -103,8 +102,8 @@ void applyAction(char* path){
 
 	if(myArgs.flags[EXEC]){
 		
-		char* command=malloc(sizeof(char)*strlen(myArgs.exec)+strlen(path)-1);
-		sprintf(command,myArgs.exec,path);
+		char* command=malloc(sizeof(char)*strlen(myArgs.execstr)+strlen(path)-1);
+		sprintf(command,myArgs.execstr,path);
 		#ifdef DEBUG
 		system(command);
 		#else

@@ -1,0 +1,36 @@
+1,17c1,17
+< drwxrwxrwx 1 samer samer 512 dec.   1 01:03 ./test
+< -rwxrwxrwx 1 samer samer 9030 nov.  16 17:09 ./test/a.out
+< drwxrwxrwx 1 samer samer 512 nov.  26 17:55 ./test/auto_tests
+< -rwxrwxrwx 1 samer samer 0 nov.  26 17:54 ./test/auto_tests/chaine
+< -rwxrwxrwx 1 samer samer 0 nov.  26 17:54 ./test/auto_tests/exec
+< -rwxrwxrwx 1 samer samer 31 nov.  26 17:54 ./test/auto_tests/image
+< -rwxrwxrwx 1 samer samer 0 nov.  26 17:54 ./test/auto_tests/ll
+< -rwxrwxrwx 1 samer samer 0 nov.  26 17:54 ./test/auto_tests/name
+< -rwxrwxrwx 1 samer samer 0 nov.  26 17:54 ./test/auto_tests/print
+< -rwxrwxrwx 1 samer samer 369 nov.  26 17:55 ./test/auto_tests/re
+< -rwxrwxrwx 1 samer samer 34 nov.  26 17:55 ./test/auto_tests/rename
+< -rwxrwxrwx 1 samer samer 569687 nov.  10 18:13 ./test/dansquelmonde1.jpg
+< -rwxrwxrwx 1 samer samer 738 nov.  14 23:29 ./test/maggi.c
+< drwxrwxrwx 1 samer samer 512 oct.   9 17:18 ./test/obj
+< drwxrwxrwx 1 samer samer 512 oct.   9 17:18 ./test/src
+< -rwxrwxrwx 1 samer samer 717 nov.  16 17:09 ./test/test.c
+< -rwxrwxrwx 1 samer samer 0 nov.  14 22:40 ./test/txtimg.odt
+---
+> drwxrwxrwx 1 samer samer 512 Dec  1 01:03 ./test
+> -rwxrwxrwx 1 samer samer 9030 Nov 16 17:09 ./test/a.out
+> drwxrwxrwx 1 samer samer 512 Nov 26 17:55 ./test/auto_tests
+> -rwxrwxrwx 1 samer samer 0 Nov 26 17:54 ./test/auto_tests/chaine
+> -rwxrwxrwx 1 samer samer 0 Nov 26 17:54 ./test/auto_tests/exec
+> -rwxrwxrwx 1 samer samer 31 Nov 26 17:54 ./test/auto_tests/image
+> -rwxrwxrwx 1 samer samer 0 Nov 26 17:54 ./test/auto_tests/ll
+> -rwxrwxrwx 1 samer samer 0 Nov 26 17:54 ./test/auto_tests/name
+> -rwxrwxrwx 1 samer samer 0 Nov 26 17:54 ./test/auto_tests/print
+> -rwxrwxrwx 1 samer samer 369 Nov 26 17:55 ./test/auto_tests/re
+> -rwxrwxrwx 1 samer samer 34 Nov 26 17:55 ./test/auto_tests/rename
+> -rwxrwxrwx 1 samer samer 569687 Nov 10 18:13 ./test/dansquelmonde1.jpg
+> -rwxrwxrwx 1 samer samer 738 Nov 14 23:29 ./test/maggi.c
+> drwxrwxrwx 1 samer samer 512 Oct  9 17:18 ./test/obj
+> drwxrwxrwx 1 samer samer 512 Oct  9 17:18 ./test/src
+> -rwxrwxrwx 1 samer samer 717 Nov 16 17:09 ./test/test.c
+> -rwxrwxrwx 1 samer samer 0 Nov 14 22:40 ./test/txtimg.odt

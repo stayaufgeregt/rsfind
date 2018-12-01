@@ -1,55 +1,11 @@
-
 #include <getopt.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-enum options { NAME , EXEC , PRINT , L, I , T};
+#include "structures.h"
+#include "cmd_parser.c"
 
-
-#define OPTIONS_NUMBER 6
-
-typedef	struct{
-	int flags[OPTIONS_NUMBER];
-	char* path;
-	char* name;
-	char* exec;
-	char* text;
-} args;
-
-typedef struct{
-	char** argv;
-}command_t;
-
-typedef struct{
-	command_t* cmd;
-	size_t nbCmd;
-}statement_t;
-
-statement_t parseCmd(char* command){
-	char** tabStr=malloc(sizeof(char*)*strlen(command));
-	int tabSize = 0;
-
-	char* word = strtok(command,"|");
-	while(word!=NULL){
-		tabStr[tabSize]=word;
-		word = strtok(NULL,"|");
-		tabSize++;
-	}
-	tabStr[tabSize]=NULL;
-	tabStr=realloc(tabStr,sizeof(char*)*(tabSize+1));
-	for(int i=0;i<tabSize;i++){
-		printf("%s\n",tabStr[i]);
-	}
-	printf("%d\n", tabSize);
-
-	char ** tabCmd=malloc(sizeof(char*)*strlen(command));
-	for(int j=0;j<tabSize;j++){
-		word = strtok(tabStr[j]," ");
-
-	}
-	return 
-}
-static args myArgs;
+static args_t myArgs;
 
 
 //analyses and processes the arguments passed to rsfind
@@ -57,7 +13,7 @@ static args myArgs;
 void getArgs(int argc,char* argv[]){
 	
 	//initialize
-	memset(&myArgs,0,sizeof(args));
+	memset(&myArgs,0,sizeof(myArgs));
 	
 	int opt;
 	int option_index = 0;
@@ -71,6 +27,7 @@ void getArgs(int argc,char* argv[]){
 
 	
 	while((opt=getopt_long(argc,argv,"n:e:plit:",long_options,&option_index))!=-1){
+		
 		switch((char)opt){
 
 			case 'n':
@@ -80,14 +37,16 @@ void getArgs(int argc,char* argv[]){
 				break;
 			case 'e':
 				myArgs.flags[EXEC]=1;
-				myArgs.exec=optarg;
 				cntOpt +=2;
 				
 				//replace {} with %s
-				char* bracketsPosition=strstr(myArgs.exec,"{}");
+				char* bracketsPosition=strstr(optarg,"{}");
 				if(bracketsPosition==NULL)exit(1);
 				strncpy(bracketsPosition,"%s",2);
 				
+				myArgs.execstr=malloc(sizeof(char)*strlen(optarg));
+				strncpy(myArgs.execstr,optarg,strlen(optarg));
+				myArgs.exec=parseCmd(optarg);
 				break;
 			case 'p':
 				myArgs.flags[PRINT]=1;
