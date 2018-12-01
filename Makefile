@@ -1,5 +1,5 @@
-Sources=main.c
-TestSources=testmain.C
+Sources=main.c dynamic_array.c
+TestSources=
 
 Executable=rsfind
 TestExecutable=test_rsfind

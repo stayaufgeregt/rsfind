@@ -33,8 +33,9 @@ void recursiveSearch(char* path,char* name){
 	if( (!myArgs.flags[NAME] || hasName(name) ) &&
 		(!myArgs.flags[T]	 || hasText(path,&path_stat) ) &&
 		(!myArgs.flags[I] 	 || isImage(path) ) )
-		
-		applyAction(path);
+		push_back_cpy(filesFound,path);
+
+		//applyAction(path);
 	
 	//recursive call if the file is a directory
 	if(S_ISDIR(path_stat.st_mode)){
