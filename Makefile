@@ -18,7 +18,7 @@ CSources=$(addprefix $(SourceDir),$(Sources))
 CObjects=$(addprefix $(ObjectDir),$(Objects))
 CExecutable=$(addprefix $(BinDir),$(Executable))
 
-all: dir clean $(CSources) $(CExecutable)
+all: dir clean $(CExecutable)
 
 clean:
 	$(RM) -f $(ObjectDir)* $(BinDir)$(Executable)
