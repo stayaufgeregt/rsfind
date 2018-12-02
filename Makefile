@@ -9,8 +9,6 @@ ObjectDir=obj/
 SourceDir=src/
 BinDir=./
 
-
-
 CC=gcc
 RM=rm
 MKDIR=mkdir -p
