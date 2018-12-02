@@ -15,7 +15,6 @@
 
 void applyAction(char* filePath);		//--print, --exec or ls -l on the current file
 bool hasName(char* fileName);			//fileName==CHAINE with --name CHAINE 
-bool isImage(char* filePath);			//true if file is an image; regardless of its extension
 bool hasText(char* filePath,struct stat* fileStat);		//file located at filePath contains string CHAINE with -t CHAINE
 void recursiveSearch(char* filePath,char* fileName);	//in-depth search from filePath
 //fileName is contained in filePath but it avoids some processing to pass it as an argument.
@@ -49,10 +48,18 @@ void recursiveSearch(char* path,char* name){
 			
 				//if it is not current dir or parent dir
 				if(strcmp(ep->d_name,"..") && strcmp(ep->d_name,".")){
-					char *childPath=malloc(sizeof(char)*(strlen(path)+2+strlen(ep->d_name)));
-					strcpy(childPath,path);
+					
+					//creation of the child's path
+					char *childPath;
+					size_t path_len=strlen(path);
+					if(path[path_len-1]=='/')	//avoid excedent '/' when parameter is "DOSSIER/+"
+						path_len--;
+					childPath=malloc(sizeof(char)*(path_len+strlen(ep->d_name)+2));
+					strncpy(childPath,path,path_len);
+					childPath[path_len]='\0';
 					strcat(childPath,"/");
-					strcat(childPath,ep->d_name);		//append the name of the child to the current path
+					strcat(childPath,ep->d_name);		
+					
 					recursiveSearch(childPath,ep->d_name);
 					free(childPath);
 				}
@@ -70,18 +77,7 @@ bool hasName(char* name){
 	return name!=NULL && !strcmp(name,myArgs.name);
 }
 
-bool isImage(char* path){
-	
-	const char *magic_info;
-	magic_t magic_buf=magic.open(MAGIC_MIME_TYPE);
 
-	if (magic.load(magic_buf, NULL) != 0) {
-		magic.close(magic_buf);
-		exit(1);
-	}
-	magic_info=magic.file(magic_buf, path);
-	return strncmp("image",magic_info,5)==0;
-}
 
 bool hasText(char* path,struct stat* path_stat){
 	

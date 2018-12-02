@@ -10,8 +10,10 @@ int main(int argc,char** argv){
 	getArgs(argc,argv);
 	filesFound=new_dynamic_array();
 	recursiveSearch(myArgs.path,NULL);
-	dlclose(magic.handle);
-
+	
+	if(myArgs.flags[I])
+		close_magic();
+	
 	for(size_t i=0;i<size(filesFound); i++)
 		applyAction(at(filesFound,i));
 	
