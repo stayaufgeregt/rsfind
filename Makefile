@@ -5,7 +5,7 @@ Executable=rsfind
 TestExecutable=test_rsfind
 
 CFlags=-std=gnu99 -c -Wall -g -Werror -Wextra
-LDFlags=-lmagic
+LDFlags=-ldl
 
 ObjectDir=obj/
 SourceDir=src/

@@ -9,7 +9,6 @@
 #include <grp.h>
 #include <pwd.h>
 #include <fcntl.h>
-#include <magic.h>
 #include <stdbool.h>
 
 #include "opt_parser.c"
@@ -74,13 +73,13 @@ bool hasName(char* name){
 bool isImage(char* path){
 	
 	const char *magic_info;
-	magic_t magic_buf=magic_open(MAGIC_MIME_TYPE);
+	magic_t magic_buf=magic.open(MAGIC_MIME_TYPE);
 
-	if (magic_load(magic_buf, NULL) != 0) {
-		magic_close(magic_buf);
+	if (magic.load(magic_buf, NULL) != 0) {
+		magic.close(magic_buf);
 		exit(1);
 	}
-	magic_info=magic_file(magic_buf, path);
+	magic_info=magic.file(magic_buf, path);
 	return strncmp("image",magic_info,5)==0;
 }
 

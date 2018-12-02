@@ -12,7 +12,7 @@ diff <(./rsfind $DOSSIER --print) <(find $DOSSIER -print)	>	"$OUTPUT"/print;
 echo basic
 diff <(./rsfind $DOSSIER -t CHAINE) <(grep -r -l $DOSSIER -e CHAINE)	>	"$OUTPUT"/chaine;
 echo basic
-diff <(./rsfind $DOSSIER -i) <(find $DOSSIER -type f -exec file {} \; | grep image | cut -d : -f 1)	>	"$OUTPUT"/image;
+diff <(./rsfind $DOSSIER -i) <(find $DOSSIER -type f -exec file {} \; | grep image | cut -d : -f 1)	>	"$OUTPUT"/img;
 echo basic
 diff <(./rsfind $DOSSIER -l) <(find $DOSSIER -exec ls -l -d {} \;)	>	"$OUTPUT"/ll;
 echo basic

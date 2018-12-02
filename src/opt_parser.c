@@ -1,12 +1,20 @@
 #include <getopt.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <magic.h>
+#include <dlfcn.h>
 
 #include "structures.h"
 #include "cmd_parser.c"
 
 static args_t myArgs;
-
+struct{
+	void* handle;
+	magic_t (*open)(int);
+	int (*load)(magic_t,const char*);
+	void (*close)(magic_t);
+	const char * (*file)(magic_t,const char*);
+}magic;
 
 //analyses and processes the arguments passed to rsfind
 //stores them in static structure myArgs
@@ -59,6 +67,20 @@ void getArgs(int argc,char* argv[]){
 			case 'i':
 				myArgs.flags[I]=1;
 				cntOpt +=1;
+				//dynamic load of magic
+				
+				magic.handle=dlopen("libmagic.so.1",RTLD_LAZY);
+
+				magic.open=dlsym(magic.handle,"magic_open");
+				magic.load=dlsym(magic.handle,"magic_load");
+				magic.close=dlsym(magic.handle,"magic_close");
+				magic.file=dlsym(magic.handle,"magic_file");
+
+				if (!magic.handle) {
+				   fprintf(stderr, "%s\n", dlerror());
+				   exit(EXIT_FAILURE);
+				}
+				dlerror();
 				break;
 			case 't':
 				myArgs.flags[T]=1;
