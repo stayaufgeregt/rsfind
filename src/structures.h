@@ -1,6 +1,9 @@
 #ifndef STRUCTURE_H_
 #define STRUCTURE_H_
 
+#include <stddef.h>
+#include "dynamic_array.h"
+
 #define DEBUG 1
 
 enum options { _name , _exec , _print , _l, _i , _t, _ename, _T, _p};
@@ -30,6 +33,7 @@ typedef	struct{
 }args_t;
 
 
-
+static args_t myArgs;
+static dynamic_array* filesFound;
 
 #endif

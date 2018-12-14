@@ -11,6 +11,7 @@
 #include <fcntl.h>
 #include <stdbool.h>
 
+#include "regex_matcher.c"
 #include "opt_parser.c"
 
 void applyAction(char* filePath);		//--print, --exec or ls -l on the current file
@@ -28,9 +29,11 @@ void recursiveSearch(char* path,char* name){
     stat(path, &path_stat);
 	
 
-	if( (!myArgs.flags[_name] || hasName(name) ) &&
-		(!myArgs.flags[_t]	 || hasText(path,&path_stat) ) &&
-		(!myArgs.flags[_i] 	 || isImage(path) ) )
+	if( (!myArgs.flags[_name] 	|| hasName(name) ) &&
+		(!myArgs.flags[_t]	 	|| hasText(path,&path_stat) ) &&
+		(!myArgs.flags[_i] 	 	|| isImage(path) ) &&
+		(!myArgs.flags[_ename]	|| regexNameMatch(path) ) &&
+		(!myArgs.flags[_T]		|| regexTextMatch(path) ))
 		push_back_cpy(filesFound,path);
 
 		//applyAction(path);

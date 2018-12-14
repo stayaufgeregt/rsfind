@@ -5,9 +5,6 @@
 #include <dlfcn.h>
 
 #include "structures.h"
-
-static args_t myArgs;
-
 #include "image.h"
 #include "cmd_parser.c"
 
