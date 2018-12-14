@@ -3,9 +3,9 @@
 
 #define DEBUG 1
 
-enum options { _name , _exec , _print , _l, _i , _t, _ename, _T};
+enum options { _name , _exec , _print , _l, _i , _t, _ename, _T, _p};
 
-#define OPTIONS_NUMBER 8
+#define OPTIONS_NUMBER 9
 
 typedef struct{
 	char** argv;
@@ -26,6 +26,7 @@ typedef	struct{
 	char* text;
 	char* ename;
 	char* T;
+	int nthreads;
 }args_t;
 
 

@@ -27,12 +27,12 @@ void getArgs(int argc,char* argv[]){
 	static struct option long_options[] ={
 		{"name",required_argument,NULL,'n'},
 		{"exec",required_argument,NULL,'e'},
-		{"print",no_argument,NULL,'p'},
+		{"print",no_argument,NULL,'P'},
 		{"ename",required_argument,NULL,'N'}
 	};
 
 	
-	while((opt=getopt_long(argc,argv,"n:e:plit:N:T:",long_options,&option_index))!=-1){
+	while((opt=getopt_long(argc,argv,"n:e:Plit:N:T:p:",long_options,&option_index))!=-1){
 		
 		switch((char)opt){
 
@@ -54,7 +54,7 @@ void getArgs(int argc,char* argv[]){
 				strncpy(myArgs.execstr,optarg,strlen(optarg));
 				myArgs.exec=parseCmd(optarg);
 				break;
-			case 'p':
+			case 'P':
 				myArgs.flags[_print]=1;
 				cntOpt +=1;
 				break;
@@ -81,6 +81,11 @@ void getArgs(int argc,char* argv[]){
 			case 'T':
 				myArgs.flags[_T]=1;
 				myArgs.T=optarg;
+				cntOpt+=2;
+				break;
+			case 'p':
+				myArgs.flags[_p]=1;
+				myArgs.nthreads=atoi(optarg);
 				cntOpt+=2;
 				break;
 			case '?':
