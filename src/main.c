@@ -17,6 +17,7 @@ int main(int argc,char** argv){
 	
 	free_strings(filesFound);
 	free_dynamic_array(filesFound);
+	free_args(myArgs);
 	return 0;
 }
 

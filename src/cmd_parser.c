@@ -3,7 +3,6 @@
 
 #include "structures.h"
 
-
 command_t str2cmd(char*);
 statement_t parseCmd(char*);
 void free_command(command_t);
@@ -18,7 +17,7 @@ statement_t parseCmd(char* execCommand){
 	exec.size = 0;
 	
 	char* savePtr;
-	char* curSubCommand = strtok_r(execCommand,"|",&savePtr);	
+	char* curSubCommand = strtok_r(execCommand,"|",&savePtr);
 	
 	while(curSubCommand!=NULL){
 		exec.subCommands[exec.size]=str2cmd(curSubCommand);
@@ -27,6 +26,29 @@ statement_t parseCmd(char* execCommand){
 	}
 
 	exec.subCommands=realloc(exec.subCommands,sizeof(command_t)*exec.size);
+	
+	//find the position of the filename to be inserted to avoid later calculations
+	char* bracketsPosition=NULL;
+	
+	for(size_t commandId=0; commandId<exec.size; commandId++){
+		
+		for(size_t wordId=0;exec.subCommands[commandId].argv[wordId]!=NULL; wordId++){
+			bracketsPosition=strstr(exec.subCommands[commandId].argv[wordId],"{}");
+			if(bracketsPosition!=NULL){
+				//replace "{}" by %s
+				bracketsPosition[0]='%';
+				bracketsPosition[1]='s';
+				//remember position of the word
+				exec.bracketsPos[0]=commandId;
+				exec.bracketsPos[1]=wordId;
+				goto done;
+			}
+		}
+	}
+	printf("No brackets founds.\n");
+	exit(EXIT_FAILURE);
+	
+	done:
 	
 	return exec;
 }

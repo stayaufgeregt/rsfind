@@ -41,12 +41,6 @@ void getArgs(int argc,char* argv[]){
 			case 'e':
 				myArgs.flags[_exec]=1;
 				cntOpt +=2;
-				
-				//replace {} with %s
-				char* bracketsPosition=strstr(optarg,"{}");
-				if(bracketsPosition==NULL)exit(1);
-				strncpy(bracketsPosition,"%s",2);
-				
 				myArgs.execstr=malloc(sizeof(char)*strlen(optarg));
 				strncpy(myArgs.execstr,optarg,strlen(optarg));
 				myArgs.exec=parseCmd(optarg);

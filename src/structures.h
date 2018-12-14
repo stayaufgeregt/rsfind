@@ -11,10 +11,15 @@ enum options { _name , _exec , _print , _l, _i , _t, _ename, _T, _p};
 #define OPTIONS_NUMBER 9
 
 typedef struct{
+	int fd[2];
+}pipe_t;
+
+typedef struct{
 	char** argv;
 }command_t;
 
 typedef struct{
+	size_t bracketsPos[2];
 	command_t* subCommands;
 	size_t size;
 }statement_t;

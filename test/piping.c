@@ -16,7 +16,7 @@ typedef struct{
 int main(int argc, char *argv[])
 {
 	
-	pipe_t* pipes=malloc(NB_PIPES*sizeof(pipe_t));
+	pipe_t pipes[NB_PIPES];
 	int* pids=malloc((NB_PIPES+1)*sizeof(int));
 	char buffer[256];
 	buffer[0]='\0';
@@ -47,25 +47,33 @@ int main(int argc, char *argv[])
 			printf("Salut : %s %s\n",commands[i],params[i]);fflush(stdout);
 			if(i!=NB_PIPES){
 				dup2(pipes[i].fd[1],1);
+				close(pipes[i].fd[0]);
+				close(pipes[i].fd[1]);
 			}
 			if(i!=0){
 				dup2(pipes[i-1].fd[0],0);
-				//read(0,buffer,256);
+				close(pipes[i-1].fd[0]);
+				close(pipes[i-1].fd[1]);
 			}
-			for(int j=0;j<NB_PIPES;j++){
-				close(pipes[j].fd[0]);
-				close(pipes[j].fd[1]);
-			}
+
 			execvp(m[i].argv[0],m[i].argv);
 			
 			exit(EXIT_SUCCESS);
 		}
 		else{
-			//waitpid(pids[i],NULL,0);
+			if(i!=NB_PIPES){
+				close(pipes[i].fd[1]);
+			}
+			if(i!=0){
+				close(pipes[i-1].fd[0]);
+				//read(0,buffer,256);
+			}
+			
+			
 		}
 			
 	}
 	//fflush(stdout);
-	//	for(int i=0;i<NB_PIPES;i++)
-	wait(NULL);
+		for(int i=0;i<NB_PIPES;i++)
+		waitpid(pids[i],NULL,0);
 }

@@ -1,11 +1,23 @@
 #include <stdio.h>
-#include <stdlib.h>
+/*#include <stdlib.h>
 #include <dlfcn.h>
 #include <magic.h>
-
-int main(void){
+*/
+typedef struct{
+	char subCommands;
+	size_t bracketsPos[2];
+	char size;
+}t;
+typedef struct{
+	size_t bracketsPos[2];
 	
-   void *handlem;
+	
+	char size;
+	char subCommands;
+}p;
+int main(void){
+	printf("%lu, %lu",sizeof(t),sizeof(p));
+   /*void *handlem;
    
    magic_t (*magic_open)(int);
    int (*magic_load)(magic_t,const char*);
@@ -43,6 +55,6 @@ int main(void){
         exit(EXIT_FAILURE);
     }
 
-	dlclose(handlem);
-	exit(EXIT_SUCCESS);
+	dlclose(handlem);*/
+	return 0;
 }

@@ -11,8 +11,10 @@
 #include <fcntl.h>
 #include <stdbool.h>
 
+#include "exec.c"
 #include "regex_matcher.c"
 #include "opt_parser.c"
+#include "sugar.h"
 
 void applyAction(char* filePath);		//--print, --exec or ls -l on the current file
 bool hasName(char* fileName);			//fileName==CHAINE with --name CHAINE 
@@ -101,18 +103,23 @@ void applyAction(char* path){
 
 	if(myArgs.flags[_exec]){
 		
-		char* command=malloc(sizeof(char)*strlen(myArgs.execstr)+strlen(path)-1);
-		sprintf(command,myArgs.execstr,path);
+		
+		
 		#ifdef DEBUG
-		system(command);
+		//system(command);
+		/*for(size_t commandId=0; commandId<EXEC_SIZE; commandId++){
+			for(size_t wordId=0;STATEMENT(commandId,wordId)!=NULL; wordId++){
+				printf("%s ",STATEMENT(commandId,wordId));
+			}
+			printf("\n");
+		}*/
+		exec(path);
+		
 		#else
 		// parse the command
 
 		#endif
 
-
-
-		free(command);
 		
 	}
 	else if(myArgs.flags[_l]){
