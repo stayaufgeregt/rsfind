@@ -1,10 +1,31 @@
-1d0
+1,3d0
+< regexp
 < ./test
-3d1
+< regexp
+5,7d1
+< regexp
 < ./test/dansquelmonde1.jpg
-6d3
+< regexp
+9d2
+< regexp
+11,13d3
+< regexp
 < ./test/obj
-8d4
+< regexp
+15,17d4
+< regexp
 < ./test/src
-10d5
+< regexp
+19,30d5
+< regexp
+< ./test/txtimg.odt
+< ./test
+< ./test/a.out
+< ./test/dansquelmonde1.jpg
+< ./test/kaid.c
+< ./test/maggi.c
+< ./test/obj
+< ./test/piping.c
+< ./test/src
+< ./test/test.c
 < ./test/txtimg.odt

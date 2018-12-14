@@ -16,7 +16,7 @@ diff <(./rsfind $DOSSIER -i) <(find $DOSSIER -type f -exec file {} \; | grep ima
 echo img $(wc -c "$OUTPUT"/img | cut -d " " -f 1) bytes
 diff <(./rsfind $DOSSIER -l) <(find $DOSSIER -exec ls -l -d {} \;)	>	"$OUTPUT"/ll;
 echo ll $(wc -c "$OUTPUT"/ll | cut -d " " -f 1) bytes
-diff <(./rsfind $DOSSIER --exec "ls -l {}") <(find $DOSSIER -exec ls -l {} \;)	> "$OUTPUT"/exec;
+diff <(./rsfind $DOSSIER --exec "cat {} | grep int | grep -v pipe | wc -c") <(find $DOSSIER -exec sh -c 'cat {} | grep int | grep -v pipe | wc -c' \;)	> "$OUTPUT"/exec;
 echo exec $(wc -c "$OUTPUT"/exec | cut -d " " -f 1) bytes
 diff <(./rsfind $DOSSIER --ename REGEXP) <(find $DOSSIER -name REGEXP)	> "$OUTPUT"/rename;
 echo rename $(wc -c "$OUTPUT"/rename | cut -d " " -f 1) bytes

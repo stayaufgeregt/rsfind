@@ -13,7 +13,8 @@ void exec(char* path){
 	char* replacementWord=malloc(sizeof(char)*strlen(saveWordPtr)+strlen(path)-1);
 	STATEMENT(BRK_CMD,BRK_WORD)=replacementWord;
 	sprintf(replacementWord,saveWordPtr,path);
-	
+	//replaces %s by the path of the file
+	//keeps the addres to restore later
 	
 	
 	pipe_t pipes[EXEC_SIZE-1];

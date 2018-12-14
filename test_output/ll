@@ -1,14 +1,22 @@
-1,2c1,2
-< drwxrwxrwx 1 samer samer 512 dec.   5 20:24 ./test
-< -rwxrwxrwx 1 samer samer 9123 dec.   5 20:24 ./test/a.out
+1,10c1,10
+< drwxrwxrwx 1 samer samer 512 dec.  14 23:29 ./test
+< -rwxrwxrwx 1 samer samer 13222 dec.  14 23:29 ./test/a.out
+< -rwxrwxrwx 1 samer samer 569687 nov.  10 18:13 ./test/dansquelmonde1.jpg
+< -rwxrwxrwx 1 samer samer 1289 dec.  14 22:13 ./test/kaid.c
+< -rwxrwxrwx 1 samer samer 738 nov.  14 23:29 ./test/maggi.c
+< drwxrwxrwx 1 samer samer 512 oct.   9 17:18 ./test/obj
+< -rwxrwxrwx 1 samer samer 1502 dec.  14 23:29 ./test/piping.c
+< drwxrwxrwx 1 samer samer 512 oct.   9 17:18 ./test/src
+< -rwxrwxrwx 1 samer samer 717 nov.  16 17:09 ./test/test.c
+< -rwxrwxrwx 1 samer samer 0 nov.  14 22:40 ./test/txtimg.odt
 ---
-> drwxrwxrwx 1 samer samer 512 déc.   5 20:24 ./test
-> -rwxrwxrwx 1 samer samer 9123 déc.   5 20:24 ./test/a.out
-4c4
-< -rwxrwxrwx 1 samer samer 1086 dec.   2 21:19 ./test/kaid.c
----
-> -rwxrwxrwx 1 samer samer 1086 déc.   2 21:19 ./test/kaid.c
-7c7
-< -rwxrwxrwx 1 samer samer 1406 dec.   5 20:24 ./test/piping.c
----
-> -rwxrwxrwx 1 samer samer 1406 déc.   5 20:24 ./test/piping.c
+> drwxrwxrwx 1 samer samer 512 Dec 14 23:29 ./test
+> -rwxrwxrwx 1 samer samer 13222 Dec 14 23:29 ./test/a.out
+> -rwxrwxrwx 1 samer samer 569687 Nov 10 18:13 ./test/dansquelmonde1.jpg
+> -rwxrwxrwx 1 samer samer 1289 Dec 14 22:13 ./test/kaid.c
+> -rwxrwxrwx 1 samer samer 738 Nov 14 23:29 ./test/maggi.c
+> drwxrwxrwx 1 samer samer 512 Oct  9 17:18 ./test/obj
+> -rwxrwxrwx 1 samer samer 1502 Dec 14 23:29 ./test/piping.c
+> drwxrwxrwx 1 samer samer 512 Oct  9 17:18 ./test/src
+> -rwxrwxrwx 1 samer samer 717 Nov 16 17:09 ./test/test.c
+> -rwxrwxrwx 1 samer samer 0 Nov 14 22:40 ./test/txtimg.odt
