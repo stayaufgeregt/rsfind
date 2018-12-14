@@ -1,2 +1,11 @@
-1d0
-< L'option n'est pas reconnue
+1,10d0
+< ./test
+< ./test/a.out
+< ./test/dansquelmonde1.jpg
+< ./test/kaid.c
+< ./test/maggi.c
+< ./test/obj
+< ./test/piping.c
+< ./test/src
+< ./test/test.c
+< ./test/txtimg.odt

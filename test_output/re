@@ -1,6 +1,10 @@
-1c1,3
-< L'option n'est pas reconnue
----
-> ./test/a.out
-> ./test/maggi.c
-> ./test/test.c
+1d0
+< ./test
+3d1
+< ./test/dansquelmonde1.jpg
+6d3
+< ./test/obj
+8d4
+< ./test/src
+10d5
+< ./test/txtimg.odt

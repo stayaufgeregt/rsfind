@@ -28,9 +28,9 @@ void recursiveSearch(char* path,char* name){
     stat(path, &path_stat);
 	
 
-	if( (!myArgs.flags[NAME] || hasName(name) ) &&
-		(!myArgs.flags[T]	 || hasText(path,&path_stat) ) &&
-		(!myArgs.flags[I] 	 || isImage(path) ) )
+	if( (!myArgs.flags[_name] || hasName(name) ) &&
+		(!myArgs.flags[_t]	 || hasText(path,&path_stat) ) &&
+		(!myArgs.flags[_i] 	 || isImage(path) ) )
 		push_back_cpy(filesFound,path);
 
 		//applyAction(path);
@@ -96,7 +96,7 @@ bool hasText(char* path,struct stat* path_stat){
 
 void applyAction(char* path){
 
-	if(myArgs.flags[EXEC]){
+	if(myArgs.flags[_exec]){
 		
 		char* command=malloc(sizeof(char)*strlen(myArgs.execstr)+strlen(path)-1);
 		sprintf(command,myArgs.execstr,path);
@@ -112,7 +112,7 @@ void applyAction(char* path){
 		free(command);
 		
 	}
-	else if(myArgs.flags[L]){
+	else if(myArgs.flags[_l]){
 		struct stat path_stat;	//info about the file
 		struct group *info_gp;	//info about file's gid
 		struct passwd *info_usr;//info about file's uid

@@ -27,21 +27,22 @@ void getArgs(int argc,char* argv[]){
 	static struct option long_options[] ={
 		{"name",required_argument,NULL,'n'},
 		{"exec",required_argument,NULL,'e'},
-		{"print",no_argument,NULL,'p'}
+		{"print",no_argument,NULL,'p'},
+		{"ename",required_argument,NULL,'N'}
 	};
 
 	
-	while((opt=getopt_long(argc,argv,"n:e:plit:",long_options,&option_index))!=-1){
+	while((opt=getopt_long(argc,argv,"n:e:plit:N:T:",long_options,&option_index))!=-1){
 		
 		switch((char)opt){
 
 			case 'n':
-				myArgs.flags[NAME]=1;
+				myArgs.flags[_name]=1;
 				myArgs.name=optarg;
 				cntOpt +=2;
 				break;
 			case 'e':
-				myArgs.flags[EXEC]=1;
+				myArgs.flags[_exec]=1;
 				cntOpt +=2;
 				
 				//replace {} with %s
@@ -54,23 +55,33 @@ void getArgs(int argc,char* argv[]){
 				myArgs.exec=parseCmd(optarg);
 				break;
 			case 'p':
-				myArgs.flags[PRINT]=1;
+				myArgs.flags[_print]=1;
 				cntOpt +=1;
 				break;
 			case 'l':
-				myArgs.flags[L]=1;
+				myArgs.flags[_l]=1;
 				cntOpt +=1;
 				break;
 			case 'i':
-				myArgs.flags[I]=1;
+				myArgs.flags[_i]=1;
 				cntOpt +=1;
 				load_magic();
 				
 				break;
 			case 't':
-				myArgs.flags[T]=1;
+				myArgs.flags[_t]=1;
 				myArgs.text=optarg;
 				cntOpt +=2;
+				break;
+			case 'N':
+				myArgs.flags[_ename]=1;
+				myArgs.ename=optarg;
+				cntOpt+=2;
+				break;
+			case 'T':
+				myArgs.flags[_T]=1;
+				myArgs.T=optarg;
+				cntOpt+=2;
 				break;
 			case '?':
 				printf("L'option n'est pas reconnue\n");

@@ -1,4 +1,14 @@
-1c1
-< drwxrwxrwx 1 samer samer 512 dec.   2 00:15 ./test
+1,2c1,2
+< drwxrwxrwx 1 samer samer 512 dec.   5 20:24 ./test
+< -rwxrwxrwx 1 samer samer 9123 dec.   5 20:24 ./test/a.out
 ---
-> drwxrwxrwx 1 samer samer 512 déc.   2 00:15 ./test
+> drwxrwxrwx 1 samer samer 512 déc.   5 20:24 ./test
+> -rwxrwxrwx 1 samer samer 9123 déc.   5 20:24 ./test/a.out
+4c4
+< -rwxrwxrwx 1 samer samer 1086 dec.   2 21:19 ./test/kaid.c
+---
+> -rwxrwxrwx 1 samer samer 1086 déc.   2 21:19 ./test/kaid.c
+7c7
+< -rwxrwxrwx 1 samer samer 1406 dec.   5 20:24 ./test/piping.c
+---
+> -rwxrwxrwx 1 samer samer 1406 déc.   5 20:24 ./test/piping.c

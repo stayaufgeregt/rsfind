@@ -11,7 +11,7 @@ int main(int argc,char** argv){
 	filesFound=new_dynamic_array();
 	recursiveSearch(myArgs.path,NULL);
 	
-	if(myArgs.flags[I])
+	if(myArgs.flags[_i])
 		close_magic();
 	
 	for(size_t i=0;i<size(filesFound); i++)
