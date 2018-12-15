@@ -1,4 +1,6 @@
-#include "opt_parser.c"
+#include "dynamic_array.h"
+#include "structures.h"
+#include "opt_parser.h"
 #include "rsfind.c"
 
 

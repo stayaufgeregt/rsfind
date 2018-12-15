@@ -9,11 +9,11 @@
 #include <stdbool.h>
 
 #include "structures.h"
-#include "text_matcher.c"
+#include "text_matcher.h"
 #include "cmd_exec.c"
 #include "image.h"
 #include "sugar.h"
-
+#include "display.h"
 void applyAction(char* filePath);		//--print, --exec or ls -l on the current file
 
 void recursiveSearch(char* filePath,char* fileName);	//in-depth search from filePath
@@ -82,53 +82,14 @@ void recursiveSearch(char* path,char* name){
 void applyAction(char* path){
 
 	if( myArgs.flags[_print] || (!myArgs.flags[_exec] && !myArgs.flags[_l]) ){
-		printf("%s\n",path);fflush(stdout);
+		simpleDisplay(path);
 	}
 	
 	if(myArgs.flags[_l]){
-		struct stat path_stat;	//info about the file
-		struct group *info_gp;	//info about file's gid
-		struct passwd *info_usr;//info about file's uid
-
-		stat(path,&path_stat);
-		(path_stat.st_mode & S_IFDIR)?(printf("d")):(printf("-"));
-		(path_stat.st_mode & S_IRUSR)?(printf("r")):(printf("-"));
-		(path_stat.st_mode & S_IWUSR)?(printf("w")):(printf("-"));
-		(path_stat.st_mode & S_IXUSR)?(printf("x")):(printf("-"));
-		(path_stat.st_mode & S_IRGRP)?(printf("r")):(printf("-"));
-		(path_stat.st_mode & S_IWGRP)?(printf("w")):(printf("-"));
-		(path_stat.st_mode & S_IXGRP)?(printf("x")):(printf("-"));
-		(path_stat.st_mode & S_IROTH)?(printf("r")):(printf("-"));
-		(path_stat.st_mode & S_IWOTH)?(printf("w")):(printf("-"));
-		(path_stat.st_mode & S_IXOTH)?(printf("x")):(printf("-"));
-		printf(" %d",(int)path_stat.st_nlink);
-
-		info_usr=getpwuid(path_stat.st_uid);
-		printf(" %s",info_usr->pw_name);
-
-		info_gp=getgrgid(path_stat.st_gid);
-		printf(" %s",info_gp->gr_name);
-
-		printf(" %ld",(unsigned long)path_stat.st_size);
-
-		char* tmp = ctime(&path_stat.st_mtime);
-		tmp = tmp + 4; // enlever le mois en toutes lettres
-		tmp[strlen(tmp)-9]='\0';// enlever les secs et l'année
-		tmp[0]=tmp[0]+32; // la maj du mos en min
-		char* tmp2 = malloc(strlen(tmp)*sizeof(char));
-		strcpy(tmp2,tmp);
-		tmp[3]='\0';
-		tmp2[1]='.';
-		tmp2[2]=' ';
-		tmp2 = tmp2 + 1;
-		strcat(tmp,tmp2);
-		
-		printf(" %s",tmp);
-		printf(" %s\n",path);
-		//free(tmp2);
+		detailedDisplay(path);fflush(stdout);
 	}
 	
 	if(myArgs.flags[_exec]){
-		exec(path);
+		execCmdOn(path);
 	}
 }

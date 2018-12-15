@@ -1,31 +1,14 @@
-1,30d0
-< REGEXP
-< ./test
-< REGEXP
-< ./test/a.out
-< REGEXP
-< ./test/dansquelmonde1.jpg
-< REGEXP
-< ./test/kaid.c
-< REGEXP
-< ./test/maggi.c
-< REGEXP
-< ./test/obj
-< REGEXP
-< ./test/piping.c
-< REGEXP
-< ./test/src
-< REGEXP
-< ./test/test.c
-< REGEXP
-< ./test/txtimg.odt
+1,13d0
 < ./test
 < ./test/a.out
 < ./test/dansquelmonde1.jpg
+< ./test/fin
+< ./test/heure.c
 < ./test/kaid.c
 < ./test/maggi.c
 < ./test/obj
 < ./test/piping.c
+< ./test/rfind
 < ./test/src
 < ./test/test.c
 < ./test/txtimg.odt

@@ -1,13 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "structures.h"
-
-command_t str2cmd(char*);
-statement_t parseCmd(char*);
-void free_command(command_t);
-void free_statement(statement_t);
-void free_args(args_t);
+#include "cmd_parser.h"
 
 statement_t parseCmd(char* execCommand){
 	//splits a command under string format into subcommands separated by pipes
@@ -45,7 +39,6 @@ statement_t parseCmd(char* execCommand){
 			}
 		}
 	}
-	printf("No brackets founds.\n");
 	exit(EXIT_FAILURE);
 	
 	done:
@@ -85,9 +78,4 @@ void free_statement(statement_t s){
 		free_command(s.subCommands[i]);
 	}
 	free(s.subCommands);
-}
-
-void free_args(args_t a){
-	free(a.execstr);
-	free_statement(a.exec);
 }

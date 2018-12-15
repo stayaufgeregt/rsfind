@@ -1,12 +1,16 @@
 #include <getopt.h>
 #include <stdlib.h>
-#include <stdio.h>
-#include <dlfcn.h>
+#include <string.h>
 
 #include "structures.h"
 #include "image.h"
-#include "cmd_parser.c"
+#include "cmd_parser.h"
+#include "opt_parser.h"
 
+void free_args(args_t a){
+	free(a.execstr);
+	free_statement(a.exec);
+}
 
 //analyses and processes the arguments passed to rsfind
 //stores them in static structure myArgs
@@ -78,14 +82,11 @@ void getArgs(int argc,char* argv[]){
 				cntOpt+=2;
 				break;
 			case '?':
-				printf("L'option n'est pas reconnue\n");
-				cntOpt +=1;
-				exit(1);
+				exit(EXIT_FAILURE);
 				break;
 
 			default:
-				printf("L'option n'est pas reconnue\n");
-				exit(1);
+				exit(EXIT_FAILURE);
 				break;
 		}
 	}

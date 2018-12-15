@@ -1,22 +1,18 @@
-#include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
 #include <unistd.h>
-#include <sys/stat.h>
+
+#include <fcntl.h>
 
 #include "structures.h"
+#include "text_matcher.h"
 
-//bool hasName(char* fileName);			//fileName==CHAINE with --name CHAINE 
-//bool hasText(char* filePath,struct stat* fileStat);		//file located at filePath contains string CHAINE with -t CHAINE
-
-bool regexNameMatch(char * path){
-	printf("%s\n%s\n",myArgs.ename,path);
-	return true;
+bool regexNameMatch(char * name){
+	return name!=NULL;
 }
 
 bool regexTextMatch(char* path){
-	printf("%s\n%s\n",myArgs.T,path);
-	return true;
+	return path!=NULL;
 }
 
 bool hasName(char* name){

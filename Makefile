@@ -1,4 +1,4 @@
-Sources=main.c dynamic_array.c
+Sources=main.c dynamic_array.c image.c cmd_parser.c opt_parser.c text_matcher.c
 
 Executable=rsfind
 

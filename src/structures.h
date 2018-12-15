@@ -38,7 +38,7 @@ typedef	struct{
 }args_t;
 
 
-static args_t myArgs;
-static dynamic_array* filesFound;
+args_t myArgs;
+dynamic_array* filesFound;
 
 #endif

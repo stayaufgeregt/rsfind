@@ -1,3 +1,6 @@
+#ifndef CMD_EXEC
+#define CMD_EXEC
+
 #include <sys/wait.h>
 #include <assert.h>
 #include <stdio.h>
@@ -8,7 +11,7 @@
 #include "sugar.h"
 #include "structures.h"
 
-void exec(char* path){
+void execCmdOn(char* path){
 	
 	char* saveWordPtr=STATEMENT(BRK_CMD,BRK_WORD);
 	char* replacementWord=malloc(sizeof(char)*strlen(saveWordPtr)+strlen(path)-1);
@@ -62,3 +65,5 @@ void exec(char* path){
 	STATEMENT(BRK_CMD,BRK_WORD)=saveWordPtr;
 	free(replacementWord);
 }
+
+#endif
