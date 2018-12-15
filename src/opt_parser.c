@@ -1,13 +1,11 @@
 #include <getopt.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <magic.h>
 #include <dlfcn.h>
 
 #include "structures.h"
 #include "image.h"
 #include "cmd_parser.c"
-
 
 
 //analyses and processes the arguments passed to rsfind

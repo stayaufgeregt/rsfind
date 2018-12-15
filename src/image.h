@@ -1,6 +1,11 @@
 #ifndef IMAGE_H_
 #define IMAGE_H_
 
+#include <stdlib.h>
+#include <stdbool.h>
+#include <magic.h>
+#include <string.h>
+
 
 struct{
 	void* handle;

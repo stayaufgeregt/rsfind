@@ -1,24 +1,21 @@
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <sys/wait.h>
 #include <dirent.h>
 #include <string.h>
-#include <errno.h>
-#include <unistd.h>
 #include <time.h>
 #include <grp.h>
 #include <pwd.h>
 #include <fcntl.h>
 #include <stdbool.h>
 
-#include "exec.c"
-#include "regex_matcher.c"
-#include "opt_parser.c"
+#include "structures.h"
+#include "text_matcher.c"
+#include "cmd_exec.c"
+#include "image.h"
 #include "sugar.h"
 
 void applyAction(char* filePath);		//--print, --exec or ls -l on the current file
-bool hasName(char* fileName);			//fileName==CHAINE with --name CHAINE 
-bool hasText(char* filePath,struct stat* fileStat);		//file located at filePath contains string CHAINE with -t CHAINE
+
 void recursiveSearch(char* filePath,char* fileName);	//in-depth search from filePath
 //fileName is contained in filePath but it avoids some processing to pass it as an argument.
 
@@ -78,24 +75,7 @@ void recursiveSearch(char* path,char* name){
 }
 
 
-bool hasName(char* name){
-	return name!=NULL && !strcmp(name,myArgs.name);
-}
 
-
-
-bool hasText(char* path,struct stat* path_stat){
-	
-	if(!S_ISREG(path_stat->st_mode))
-		return false;
-	
-	int fd;
-	fd = open(path,O_RDONLY);
-	char fileBuffer[path_stat->st_size];
-	read(fd,fileBuffer,path_stat->st_size);
-	/////////////if read fails ????
-	return strstr(fileBuffer,myArgs.text)!=NULL;
-}
 
 
 

@@ -1,3 +1,4 @@
+#include "opt_parser.c"
 #include "rsfind.c"
 
 
