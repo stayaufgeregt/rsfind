@@ -55,10 +55,9 @@ void exec(char* path){
 			}
 		}
 	}
-	for(size_t i=0;i<EXEC_SIZE-1;i++)
+	for(size_t i=0;i<EXEC_SIZE;i++)
 		waitpid(pids[i],NULL,0);
 	
 	STATEMENT(BRK_CMD,BRK_WORD)=saveWordPtr;
 	free(replacementWord);
-
 }

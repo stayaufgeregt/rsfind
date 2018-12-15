@@ -101,28 +101,11 @@ bool hasText(char* path,struct stat* path_stat){
 
 void applyAction(char* path){
 
-	if(myArgs.flags[_exec]){
-		
-		
-		
-		#ifdef DEBUG
-		//system(command);
-		/*for(size_t commandId=0; commandId<EXEC_SIZE; commandId++){
-			for(size_t wordId=0;STATEMENT(commandId,wordId)!=NULL; wordId++){
-				printf("%s ",STATEMENT(commandId,wordId));
-			}
-			printf("\n");
-		}*/
-		exec(path);
-		
-		#else
-		// parse the command
-
-		#endif
-
-		
+	if( myArgs.flags[_print] || (!myArgs.flags[_exec] && !myArgs.flags[_l]) ){
+		printf("%s\n",path);fflush(stdout);
 	}
-	else if(myArgs.flags[_l]){
+	
+	if(myArgs.flags[_l]){
 		struct stat path_stat;	//info about the file
 		struct group *info_gp;	//info about file's gid
 		struct passwd *info_usr;//info about file's uid
@@ -164,7 +147,8 @@ void applyAction(char* path){
 		printf(" %s\n",path);
 		//free(tmp2);
 	}
-	else{
-		printf("%s\n",path);
+	
+	if(myArgs.flags[_exec]){
+		exec(path);
 	}
 }
