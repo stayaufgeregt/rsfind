@@ -19,6 +19,7 @@ statement_t parseCmd(char* execCommand){
 		exec.size++;
 	}
 
+	
 	exec.subCommands=realloc(exec.subCommands,sizeof(command_t)*exec.size);
 	
 	//find the position of the filename to be inserted to avoid later calculations
@@ -39,6 +40,8 @@ statement_t parseCmd(char* execCommand){
 			}
 		}
 	}
+	free(exec.subCommands);
+
 	exit(EXIT_FAILURE);
 	
 	done:
