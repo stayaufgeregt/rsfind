@@ -1,9 +1,9 @@
-Sources=main.c dynamic_array.c image.c cmd_parser.c opt_parser.c text_matcher.c
+Sources=main.c dynamic_array.c
 
 Executable=rsfind
 
 CFlags=-std=gnu99 -c -Wall -g -Werror -Wextra
-LDFlags=-ldl
+LDFlags=-ldl -lpcre2-8
 
 ObjectDir=obj/
 SourceDir=src/
