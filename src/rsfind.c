@@ -31,8 +31,8 @@ void recursiveSearch(char* path,char* name){
 	if( (!myArgs.flags[_name] 	|| hasName(name) ) &&
 		(!myArgs.flags[_t]	 	|| hasText(path,&path_stat) ) &&
 		(!myArgs.flags[_i] 	 	|| isImage(path) ) &&
-		(!myArgs.flags[_ename]	|| regexNameMatch(path) ) &&
-		(!myArgs.flags[_T]		|| regexTextMatch(path) ))
+		(!myArgs.flags[_ename]	|| regexNameMatch(name) ) &&
+		(!myArgs.flags[_T]		|| regexTextMatch(path,&path_stat) ))
 		push_back_cpy(filesFound,path);
 
 		//applyAction(path);

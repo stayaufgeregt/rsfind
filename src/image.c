@@ -9,15 +9,16 @@
 void load_magic(){
 	magic.handle=dlopen("libmagic.so.1",RTLD_LAZY);
 
+	if (!magic.handle) {
+	   exit(EXIT_FAILURE);
+	}
+	dlerror();
+
 	magic.open=dlsym(magic.handle,"magic_open");
 	magic.load=dlsym(magic.handle,"magic_load");
 	magic.close=dlsym(magic.handle,"magic_close");
 	magic.file=dlsym(magic.handle,"magic_file");
 
-	if (!magic.handle) {
-	   exit(EXIT_FAILURE);
-	}
-	dlerror();
 }
 
 void close_magic(){
