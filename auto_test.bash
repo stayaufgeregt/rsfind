@@ -1,5 +1,5 @@
 #!/bin/bash
-DOSSIER="./test";
+DOSSIER="/mnt/c/Users/Samer/Downloads";
 OUTPUT="./test_output"
 CHAINE="int";
 mkdir -p "$OUTPUT";
