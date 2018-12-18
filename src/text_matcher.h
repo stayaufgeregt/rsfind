@@ -15,5 +15,6 @@ bool regexNameMatch(char* fileName);
 bool regexTextMatch(char* path,struct stat* path_stat);
 bool hasName(char* name);
 bool hasText(char* path,struct stat* path_stat);
+int globerr(const char *path, int eerrno);
 
 #endif

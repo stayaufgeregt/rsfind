@@ -1,42 +1,6 @@
-0a1,31
-> ./test/testCompletPERL.c
-> ./test/heure.c
-> ./test/threadify.h.gch
-> ./test/kaid.c
-> ./test/threadify.c
-> ./test/maggi.c
-> ./test/cpythread.c
-> ./test/piping.c
-> ./test/testPERL.c
+0a1
 > ./test/a.out
-> ./test/test.c
-> ./src/opt_parser.c
-> ./src/image.h
-> ./src/structures.h
-> ./src/dynamic_array.c
-> ./src/cmd_parser.c
-> ./src/display.h
-> ./src/main.c
-> ./src/opt_parser.h
-> ./src/text_matcher.c
-> ./src/cmd_parser.h
-> ./src/threadify.h
-> ./src/cmd_exec.c
-> ./src/rsfind.c
-> ./.git/hooks/pre-rebase.sample
-> ./.git/hooks/prepare-commit-msg.sample
-> ./.git/hooks/update.sample
-> ./.git/hooks/pre-commit.sample
-> ./.git/index
-> ./comments.txt
-> ./fich.txt
-1a33,41
-> ./test_output/rename
-> ./README.md
-> ./obj/opt_parser.o
-> ./obj/dynamic_array.o
-> ./obj/main.o
-> ./obj/cmd_parser.o
-> ./obj/image.o
-> ./obj/text_matcher.o
-> ./rsfind
+1a3
+> ./test/dansquelmonde1.jpg
+11a14
+> ./test/threadify.h.gch

@@ -3,9 +3,11 @@
 #include <unistd.h>
 
 #include <fcntl.h>
+#include <fnmatch.h>
 
 #include "structures.h"
 #include "text_matcher.h"
+
 
 
 bool regexPerl(char* fileToCmp,char* ptrn){
@@ -38,18 +40,18 @@ bool regexPerl(char* fileToCmp,char* ptrn){
 	  	pcre2_code_free(regexPattern);
 	  	
 		if(a>=1){
-			return 1;
+			return true;
 		} else {
-			return 0;
+			return false;
 		}		
 	}
-	return 0;
+	return false;
 
 }
 
 
 bool regexNameMatch(char* fileName){
-	return fileName != NULL && regexPerl(fileName,myArgs.ename);
+	return fileName != NULL && fnmatch(myArgs.ename,fileName,0)==0;
 }
 
 

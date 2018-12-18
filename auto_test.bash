@@ -1,7 +1,9 @@
 #!/bin/bash
-DOSSIER='.';
+DOSSIER='./test';
 OUTPUT="./test_output"
 CHAINE="int";
+REGEXP="*.h";
+RETEXT="int*";
 mkdir -p "$OUTPUT";
 
 diff <(./rsfind $DOSSIER) <(find $DOSSIER) > "$OUTPUT"/basic;
@@ -18,9 +20,9 @@ diff <(./rsfind $DOSSIER -l) <(find $DOSSIER -exec ls -l -d {} \;)	>	"$OUTPUT"/l
 echo ll $(wc -c "$OUTPUT"/ll | cut -d " " -f 1) bytes
 diff <(./rsfind $DOSSIER --exec "cat {} | grep int | grep -v pipe | wc -c") <(find $DOSSIER -exec sh -c "cat {} | grep int | grep -v pipe | wc -c" \;)	> "$OUTPUT"/exec;
 echo exec $(wc -c "$OUTPUT"/exec | cut -d " " -f 1) bytes
-diff <(./rsfind $DOSSIER --ename REGEXP) <(find $DOSSIER -name REGEXP)	> "$OUTPUT"/rename;
+diff <(./rsfind $DOSSIER --ename $REGEXP) <(find $DOSSIER -iname $REGEXP)	> "$OUTPUT"/rename;
 echo rename $(wc -c "$OUTPUT"/rename | cut -d " " -f 1) bytes
-diff <(./rsfind $DOSSIER -T "regexp") <(grep -r -l $DOSSIER -e "int") > "$OUTPUT"/re;
+diff <(./rsfind $DOSSIER -T $RETEXT) <(grep -r -l $DOSSIER -e $RETEXT) > "$OUTPUT"/re;
 echo re $(wc -c "$OUTPUT"/re | cut -d " " -f 1) bytes
 diff <(./rsfind $DOSSIER -p 4) <(./rsfind $DOSSIER) > "$OUTPUT"/threads;
 echo threads $(wc -c "$OUTPUT/threads" | cut -d " " -f 1) bytes
