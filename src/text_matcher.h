@@ -1,6 +1,6 @@
 #ifndef TEXT_MATCHER_H_
 #define TEXT_MATCHER_H_
-
+///@file
 #define PCRE2_CODE_UNIT_WIDTH 8
 #include <sys/stat.h>
 #include <stdbool.h>

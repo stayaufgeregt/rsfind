@@ -1,6 +1,6 @@
 #ifndef CMD_PARSER_H_
 #define CMD_PARSER_H_
-
+///@file
 #include "structures.h"
 
 ///parses a string into a space-separated words

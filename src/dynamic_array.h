@@ -1,6 +1,6 @@
 #ifndef DYNARRAY_H_
 #define DYNARRAY_H_
-
+///@file
 #include <stdlib.h>
 #define INITIAL_SIZE 10
 #define GROWING_RATIO 1.5

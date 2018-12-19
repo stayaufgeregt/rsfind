@@ -1,6 +1,6 @@
 #ifndef SUGAR_H_
 #define SUGAR_H_
-
+///@file
 /**
 	Macros to lighten up syntax
 	used for myArgs.exec

@@ -1,6 +1,6 @@
 #ifndef STRUCTURE_H_
 #define STRUCTURE_H_
-
+///@file
 #include <stddef.h>
 #include "dynamic_array.h"
 

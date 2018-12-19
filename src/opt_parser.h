@@ -1,6 +1,6 @@
 #ifndef OPT_PARSER_H_
 #define OPT_PARSER_H_
-
+///@file
 #include "structures.h"
 
 ///frees memory allocated to arg_t structure

@@ -1,6 +1,6 @@
 #ifndef THREADS_H_
 #define THREADS_H_
-
+///@file
 /**
 Applies operations on a path; namely --exec, --print, -l
 */
