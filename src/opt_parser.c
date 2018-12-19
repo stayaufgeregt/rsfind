@@ -7,8 +7,9 @@
 #include "cmd_parser.h"
 #include "opt_parser.h"
 
+char DEFAULT_PATH[]=".";
+
 void free_args(args_t a){
-	free(a.execstr);
 	free_statement(a.exec);
 }
 
@@ -43,8 +44,6 @@ void getArgs(int argc,char* argv[]){
 			case 'e':
 				myArgs.flags[_exec]=1;
 				cntOpt +=2;
-				myArgs.execstr=malloc(sizeof(char)*strlen(optarg));
-				strncpy(myArgs.execstr,optarg,strlen(optarg));
 				myArgs.exec=parseCmd(optarg);
 				break;
 			case 'P':
@@ -97,8 +96,7 @@ void getArgs(int argc,char* argv[]){
 		myArgs.path=argv[argc-1];
 	}
 	else{
-		//default path
-		myArgs.path=".";
+		myArgs.path=DEFAULT_PATH;
 	}
 	
 }

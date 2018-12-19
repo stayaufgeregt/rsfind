@@ -10,11 +10,10 @@
 //bool hasName(char* fileName);			//fileName==CHAINE with --name CHAINE 
 //bool hasText(char* filePath,struct stat* fileStat);		//file located at filePath contains string CHAINE with -t CHAINE
 
-bool regexPerl(char* fileToCmp,char* pattern);
+bool regexPerl(char* haystack,char* needle);
 bool regexNameMatch(char* fileName);
 bool regexTextMatch(char* path,struct stat* path_stat);
 bool hasName(char* name);
 bool hasText(char* path,struct stat* path_stat);
-int globerr(const char *path, int eerrno);
 
 #endif

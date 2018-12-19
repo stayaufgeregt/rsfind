@@ -6,6 +6,9 @@
 #include <stdlib.h>#include <unistd.h>
 #include <pthread.h>
 
+int available;
+bool workingThread[NB_THREAD_MAX];
+
 void *thread_1(void *arg)
 {
     printf("Nous sommes dans le thread.\n");

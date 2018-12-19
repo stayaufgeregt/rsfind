@@ -19,16 +19,15 @@ typedef struct{
 }command_t;
 
 typedef struct{
-	size_t bracketsPos[2];
+	size_t bracketsPos[2];		//location of the "{}" in the command		
 	command_t* subCommands;
 	size_t size;
-}statement_t;
+}statement_t;			//command with pipes parsed
 
 
 typedef	struct{
 	int flags[OPTIONS_NUMBER];
 	statement_t exec;
-	char* execstr;
 	char* path;
 	char* name;
 	char* text;
