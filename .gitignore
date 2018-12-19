@@ -2,4 +2,5 @@ rsfind
 obj/
 test/obj/
 test/bin/
+test_output/
 *.o
