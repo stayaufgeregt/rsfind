@@ -1,7 +1,10 @@
 #ifndef SUGAR_H_
 #define SUGAR_H_
 
-
+/**
+	Macros to lighten up syntax
+	used for myArgs.exec
+*/
 #define BRK_CMD myArgs.exec.bracketsPos[0]
 #define BRK_WORD myArgs.exec.bracketsPos[1]
 #define STATEMENT(command,word) myArgs.exec.subCommands[command].argv[word]

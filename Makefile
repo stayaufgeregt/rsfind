@@ -1,9 +1,9 @@
-Sources=main.c dynamic_array.c image.c cmd_parser.c opt_parser.c text_matcher.c
+Sources=main.c rsfind.c dynamic_array.c display.c image.c cmd_exec.c cmd_parser.c opt_parser.c text_matcher.c process.c
 
 Executable=rsfind
 
 CFlags=-std=gnu99 -c -Wall -g -Werror -Wextra
-LDFlags=-ldl -lpcre2-8
+LDFlags=-ldl -lpcre2-8 -lpthread
 
 ObjectDir=obj/
 SourceDir=src/
@@ -29,7 +29,7 @@ dir:
 run: $(CExecutable)
 	$(CExecutable) $(ARGS)
 
-test:  dir clean $(CSources) $(CExecutable)
+test:  dir clean $(CExecutable)
 	bash ./auto_test.bash
 
 	

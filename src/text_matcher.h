@@ -3,17 +3,17 @@
 
 #define PCRE2_CODE_UNIT_WIDTH 8
 #include <sys/stat.h>
-#include <pcre2.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <stdbool.h>
 
-//bool hasName(char* fileName);			//fileName==CHAINE with --name CHAINE 
-//bool hasText(char* filePath,struct stat* fileStat);		//file located at filePath contains string CHAINE with -t CHAINE
-
+///true if the needle is in the haystack
 bool regexPerl(char* haystack,char* needle);
-bool regexNameMatch(char* fileName);
+///true if the name matches the glob pattern passed to --ename
+bool regexNameMatch(char* name);
+///true if the files's text contains the regex passed to -T
 bool regexTextMatch(char* path,struct stat* path_stat);
+///true if name equals the string passed to --name
 bool hasName(char* name);
+///true if the file's text contains the string passed to -t
 bool hasText(char* path,struct stat* path_stat);
 
 #endif

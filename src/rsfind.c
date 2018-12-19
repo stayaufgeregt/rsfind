@@ -2,22 +2,11 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <string.h>
-#include <time.h>
-#include <grp.h>
-#include <pwd.h>
 #include <fcntl.h>
-#include <stdbool.h>
 
 #include "structures.h"
 #include "text_matcher.h"
-#include "cmd_exec.c"
 #include "image.h"
-#include "sugar.h"
-#include "display.h"
-void applyAction(char* filePath);		//--print, --exec or ls -l on the current file
-
-void recursiveSearch(char* filePath,char* fileName);	//in-depth search from filePath
-//fileName is contained in filePath but it avoids some processing to pass it as an argument.
 
 
 
@@ -71,25 +60,5 @@ void recursiveSearch(char* path,char* name){
 		else{
 			exit(1);
 		}		
-	}
-}
-
-
-
-
-
-
-void applyAction(char* path){
-
-	if( myArgs.flags[_print] || (!myArgs.flags[_exec] && !myArgs.flags[_l]) ){
-		simpleDisplay(path);
-	}
-	
-	if(myArgs.flags[_l]){
-		detailedDisplay(path);fflush(stdout);
-	}
-	
-	if(myArgs.flags[_exec]){
-		execCmdOn(path);
 	}
 }

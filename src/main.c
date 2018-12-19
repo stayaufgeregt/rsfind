@@ -1,7 +1,9 @@
 #include "dynamic_array.h"
 #include "structures.h"
 #include "opt_parser.h"
-#include "rsfind.c"
+#include "process.h"
+#include "rsfind.h"
+#include "image.h"
 
 
 int main(int argc,char** argv){

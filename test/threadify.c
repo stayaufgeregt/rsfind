@@ -55,10 +55,9 @@ int main(void)
 		
 		sem_wait(&availableSem);
 			sem_wait(&semTab);
-			int threadID=getNextId();
-			printf("thread ID : %d\n",threadID);fflush(stdout);
-			availableThreads[threadID]=0;
-			//pthread_join(threads[threadID],NULL);
+				int threadID=getNextId();
+				printf("thread ID : %d\n",threadID);fflush(stdout);
+				availableThreads[threadID]=0;
 			sem_post(&semTab);
 			
 		args[threadID].order=i;

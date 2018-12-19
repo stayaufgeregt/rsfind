@@ -1,6 +1,3 @@
-#ifndef CMD_EXEC
-#define CMD_EXEC
-
 #include <sys/wait.h>
 #include <assert.h>
 #include <stdio.h>
@@ -10,6 +7,7 @@
 
 #include "sugar.h"
 #include "structures.h"
+#include "cmd_exec.h"
 
 void execCmdOn(char* path){
 	
@@ -65,5 +63,3 @@ void execCmdOn(char* path){
 	STATEMENT(BRK_CMD,BRK_WORD)=saveWordPtr;
 	free(replacementWord);
 }
-
-#endif

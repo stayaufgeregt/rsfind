@@ -5,7 +5,7 @@
 #include <magic.h>
 
 
-
+///global structure containing function pointers pointing to libmagic functions
 struct{
 	void* handle;
 	magic_t (*open)(int);
@@ -14,8 +14,11 @@ struct{
 	const char * (*file)(magic_t,const char*);
 }magic;
 
-bool isImage(char* path);//true if file is an image; regardless of its extension
-void load_magic();		//dynamic load of libmagic
-void close_magic();		//close magic handle
+///true if file is an image; false otherwise
+bool isImage(char* path);
+///dynamically load libmagic; fills global magic struct
+void load_magic();
+///closes libmagic
+void close_magic();
 
 #endif

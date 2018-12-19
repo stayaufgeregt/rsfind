@@ -1,13 +1,13 @@
+#include "text_matcher.h"
+#include "structures.h"
+
 #include <string.h>
 #include <stdbool.h>
 #include <unistd.h>
-
 #include <fcntl.h>
 #include <fnmatch.h>
-
-#include "structures.h"
-#include "text_matcher.h"
-
+#include <pcre2.h>
+#include <stdlib.h>
 
 
 bool regexPerl(char* fileToCmp,char* ptrn){
@@ -27,7 +27,7 @@ bool regexPerl(char* fileToCmp,char* ptrn){
 	if (regexPattern == NULL){
  		PCRE2_UCHAR buffer[256];
   		pcre2_get_error_message(errornumber, buffer, sizeof(buffer));
-  		printf("PCRE2 compilation failed at offset %d: %s\n", (int)erroroffset,buffer);
+  		//printf("PCRE2 compilation failed at offset %d: %s\n", (int)erroroffset,buffer);
   		return 0;
   	} else {
 
