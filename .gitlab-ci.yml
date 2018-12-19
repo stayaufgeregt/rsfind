@@ -1,5 +1,4 @@
-before-script:
-    image: debian:stretch
+before_script:
     - apt-get update -qq && apt-get install -y -qq magic
     
 
@@ -7,15 +6,15 @@ before-script:
 build:
     image: debian:stretch
     script:
-        -make
+        - make
         
 test:
     image: debian:stretch
     script:
-        -make test
+        - make test
         
 clean:
     image: debian:stretch
     script:
-        -make clean
+        - make clean
        
