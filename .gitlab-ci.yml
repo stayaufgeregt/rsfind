@@ -1,20 +1,12 @@
-before_script:
-    - apt-get update -qq && apt-get install -y -qq magic
-    
-
+image: gcc
+stages:
+  - build
 
 build:
-    image: debian:stretch
-    script:
-        - make
-        
-test:
-    image: debian:stretch
-    script:
-        - make test
-        
-clean:
-    image: debian:stretch
-    script:
-        - make clean
-       
+  stage: build
+  
+  before_script:
+    - apt update && apt -y install make
+
+  script:
+    - make
